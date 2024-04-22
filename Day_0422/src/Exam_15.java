@@ -22,9 +22,19 @@ public class Exam_15 {
 		} else if (c.equals("*")) {
 			result = n1 * n2;
 		} else if (c.equals("/")) {
-			result = n1 / n2;
+			if (n1 != 0 && n2 != 0) {
+				result = n1 / n2;				
+			} else {
+				System.out.println("입력오류");
+				System.exit(1);
+			}
 		} else if (c.equals("%")) {
-			result = n1 % n2;
+			if (n1 != 0 && n2 != 0) {
+				result = n1 & n2;				
+			} else {
+				System.out.println("입력오류");
+				System.exit(1);
+			}
 		} else if (c.equals("<<")) {
 			result = n1 << n2;
 		} else if (c.equals(">>")) {
