@@ -12,17 +12,19 @@ public class Exam_06 {
 		System.out.print("입력 자료 : ");
 		int num = sc.nextInt();
 		int min = sc.nextInt();
-		int charge;
+		int charge = 0;
 
+		System.out.println("자동차번호 : " + num);
+		
 		if (min < 10) {
-			charge = 0;
-		} else if (min >= 10 && min <= 30) {
+			System.out.println("주차요금 : 무료");
+			System.exit(1);
+		} else if (min <= 30) {
 			charge = 500;
 		} else {
 			charge = 500 + ((min - 30) / 10 + 1) * 500;
 		}
 		
-		System.out.println("자동차번호 : " + num);
 		System.out.println("주차요금 : " + charge + "원");
 	}
 
