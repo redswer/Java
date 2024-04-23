@@ -25,6 +25,10 @@ public class Exam_06 {
 			charge = 500 + ((min - 30) / 10 + 1) * 500;
 		}
 		
+		if (charge > 30000) {
+			charge = 30000;
+		}
+		
 		System.out.println("주차요금 : " + charge + "원");
 	}
 
