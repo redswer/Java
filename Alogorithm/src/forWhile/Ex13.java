@@ -29,7 +29,7 @@ public class Ex13 {
 		int cnt = 0;
 		int mok = 0;
 		
-		while (dan != 0) {
+		while (na != 0) {
 			mok = na / dan;
 			na = na % dan;
 			System.out.println(dan + " 원 : " + mok);
