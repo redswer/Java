@@ -30,16 +30,14 @@ public class Ex13 {
 		int mok = 0;
 		
 		while (dan != 0) {
+			mok = na / dan;
+			na = na % dan;
+			System.out.println(dan + " 원 : " + mok);
+			
 			if (cnt == 0) {
-				mok = na / dan;
-				na = na % dan;
-				System.out.println(dan + " 원 : " + mok);
 				dan /= 5;
 				cnt = 1;
 			} else if (cnt == 1) {
-				mok = na / dan;
-				na = na % dan;
-				System.out.println(dan + " 원 : " + mok);
 				dan /= 2;
 				cnt = 0;
 			}
