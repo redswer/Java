@@ -10,13 +10,13 @@ public class Exam_05 {
 		System.out.println(Arrays.toString(str));
 	
 		for(char c : ch) {
-			System.out.printf("%3s", c);
+			System.out.printf("%s\t", c);
 		}
 		
 		System.out.println();
 		
 		for(String s : str) {
-			System.out.printf("%4s", s);
+			System.out.printf("%s\t", s);
 		}
 	}
 
