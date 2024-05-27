@@ -1,3 +1,4 @@
+import java.util.Scanner;
 
 public class Student {
 	String school = "oo대학교";
@@ -19,6 +20,20 @@ public class Student {
 		
 		cal();
 		print();
+	}
+	
+	// 키보드 입력 (Exam_10)
+	void input() {
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.print("학생등록 : ");
+		bun = sc.nextInt();
+		name = sc.next();
+		kor = sc.nextInt();
+		eng = sc.nextInt();
+		math = sc.nextInt();
+		
+		cal();
 	}
 	
 	// 총점, 평균 계산
