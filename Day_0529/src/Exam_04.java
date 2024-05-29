@@ -26,6 +26,21 @@ class Sawon {
 		System.out.printf("%d\t%s\t%s\t%d\n", bun, name, g, age);
 	}
 }
+
+class Sort {
+	void sort(Sawon[] s, int cnt) {
+		for (int i = 0; i < cnt - 1; i++) {
+			for (int j = i + 1; j < cnt; j++) {
+				if (s[i].bun > s[j].bun) {
+					Sawon tmp = s[i];
+					s[i] = s[j];
+					s[j] = tmp;
+				}
+			}
+		}
+	}
+}
+
 public class Exam_04 {
 
 	public static void main(String[] args) {
@@ -52,6 +67,14 @@ public class Exam_04 {
 			
 			cnt++;
 		}
+		
+		System.out.println("번호\t이름\t성별\t나이");
+		for (int i = 0; i < cnt; i++) {
+			s[i].print();
+		}
+		
+		Sort sort = new Sort();
+		sort.sort(s, cnt);
 		
 		System.out.println("번호\t이름\t성별\t나이");
 		for (int i = 0; i < cnt; i++) {
