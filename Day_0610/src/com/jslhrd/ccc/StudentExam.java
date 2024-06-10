@@ -25,46 +25,39 @@ public class StudentExam {
 		// 이미 등록된 학번이 있는 경우 경고 출력 후 재입력
 		// 학생은 최대 10명까지만 가능
 		// 입력 종료 시 출력 형식에 맞게 출력
-		
 		Scanner sc = new Scanner(System.in);
-		Student[] st = new Student[10];
 		StudentProcess stp = new StudentProcess();
-		int cnt = 0;
 		
-		while(cnt < 10) {
-			System.out.print("등록 : ");
-			String bun = sc.next();
-			if (bun.equals("0000")) {
+		while(true) {
+			System.out.println("<<콘테스트 관리 프로그램>>");
+			System.out.println("[1]참가자 등록");
+			System.out.println("[2]입력자료순 출력");
+			System.out.println("[3]순위(성적)순 출력");
+			System.out.println("[4]프로그램 종료");
+			System.out.print("메뉴 선택 : ");
+			
+			int c = sc.nextInt();
+			
+			switch (c) {
+			case 1:
+				stp.input();
+				break;
+			case 2:
+				stp.print();
+				break;
+			case 3:
+				stp.sort();
+				break;
+			case 4:
+				System.out.println("프로그램 종료");
+				System.exit(0);
+				break;
+
+			default:
 				break;
 			}
-			
-			boolean dupCheck = false;
-			for (int i = 0; i < cnt; i++) {
-				if (bun.equals(st[i].getBun())) {
-					System.out.println(">> 이미 등록된 학생입니다");
-					dupCheck = true;
-					break;
-				}
-			}
-			
-			if (dupCheck) {
-				continue;
-			}
-			
-			String name = sc.next();
-			String gender = sc.next();
-			int score = sc.nextInt();
-			
-			Student student = new Student(bun, name, gender, score);
-			st[cnt] = student;
-			
-			cnt++;
 		}
 		
-		stp.print(st, cnt);
-		System.out.println("---------------------------------------------");
-		stp.sort(st, cnt);
-		stp.print(st, cnt);
 	}
 
 }
