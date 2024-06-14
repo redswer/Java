@@ -45,5 +45,35 @@ public class Calculator implements Cal {
 		}
 		System.out.print(tot + "\n");
 	}
-
+	
+	// 여러 개 빼기
+	public void sub(int...a) {
+		int result = a[0];
+		
+		System.out.print(a[0]);
+		for (int i = 1; i < a.length; i++) {
+			System.out.printf(" - %d", a[i]);
+			result -= a[i];
+		}
+		
+		System.out.printf(" = %d\n", result);
+	}
+	
+	// 여러 개 곱하기
+	public void mul(int...a) {
+		int tot = 1;
+		
+		for (int i = 0; i < a.length; i++) {
+			if (i != a.length - 1) {
+				System.out.printf("%d * ", a[i]);
+			} else {
+				System.out.printf("%d = ", a[i]);
+			}
+			
+			tot *= a[i];
+		}
+		
+		System.out.printf("%d\n", tot);
+	}
+	
 }
