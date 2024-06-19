@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Random;
 
 public class Exam_08 {
@@ -26,9 +27,9 @@ public class Exam_08 {
 			cnt++;
 		}
 		
-		for (int i = 0; i < lotto.length; i++) {
-			System.out.print(lotto[i] + " ");
-		}
+		System.out.println(Arrays.toString(lotto));
+		Arrays.sort(lotto);
+		System.out.println(Arrays.toString(lotto));
 	}
 
 }
