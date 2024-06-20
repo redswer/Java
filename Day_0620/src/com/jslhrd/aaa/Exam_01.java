@@ -37,15 +37,15 @@ public class Exam_01 {
 			case 9:
 				grade = 'A';
 				break;
-				
 			case 8:
 				grade = 'B';
-				
+				break;
 			case 7:
 				grade = 'C';
-				
+				break;
 			case 6:
 				grade = 'D';
+				break;
 			}
 			
 			System.out.printf("%s\t%s\t%d\t%d\t%d\t%d\t%.1f\t%s\n", bun, name, kor, eng, math, tot, avg, grade);
