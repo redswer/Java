@@ -1,11 +1,14 @@
 package com.jslhrd.aaa;
 
-public class Student {
+public class Student implements Comparable<Student> {
 	private String bun;
 	private String name;
 	private int kor;
 	private int eng;
 	private int math;
+	private int tot;
+	private double avg;
+	private char grade;
 	
 	public Student() {}
 	
@@ -31,7 +34,12 @@ public class Student {
 			return false;
 		}
 	}
-
+	
+	@Override
+	public int compareTo(Student o) {
+		return bun.compareTo(o.bun);
+	}
+	
 	public String getBun() {
 		return bun;
 	}
@@ -71,4 +79,29 @@ public class Student {
 	public void setMath(int math) {
 		this.math = math;
 	}
+
+	public int getTot() {
+		return tot;
+	}
+
+	public void setTot(int tot) {
+		this.tot = tot;
+	}
+
+	public double getAvg() {
+		return avg;
+	}
+
+	public void setAvg(double avg) {
+		this.avg = avg;
+	}
+
+	public char getGrade() {
+		return grade;
+	}
+
+	public void setGrade(char grade) {
+		this.grade = grade;
+	}
+	
 }

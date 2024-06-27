@@ -74,14 +74,34 @@ public class StudentExam {
 					break;
 			}
 			
+			list.get(i).setTot(tot);
+			list.get(i).setAvg(avg);
+			list.get(i).setGrade(grade);
+			
 			System.out.print(list.get(i).getBun() + "\t");
 			System.out.print(list.get(i).getName() + "\t");
 			System.out.print(list.get(i).getKor() + "\t");
 			System.out.print(list.get(i).getEng() + "\t");
 			System.out.print(list.get(i).getMath() + "\t");
-			System.out.print(tot + "\t");
-			System.out.printf("%.1f\t", avg);
-			System.out.print(grade + "\n");
+			System.out.print(list.get(i).getTot() + "\t");
+			System.out.printf("%.1f\t", list.get(i).getAvg());
+			System.out.print(list.get(i).getGrade() + "\n");
+		}
+		
+		System.out.println("-------------------------번호순 출력--------------------------");
+		
+		Collections.sort(list);
+		
+		System.out.println("학번\t이름\t국어\t영어\t수학\t총점\t평균\t판정");
+		for (int i = 0; i < list.size(); i++) {
+			System.out.print(list.get(i).getBun() + "\t");
+			System.out.print(list.get(i).getName() + "\t");
+			System.out.print(list.get(i).getKor() + "\t");
+			System.out.print(list.get(i).getEng() + "\t");
+			System.out.print(list.get(i).getMath() + "\t");
+			System.out.print(list.get(i).getTot() + "\t");
+			System.out.printf("%.1f\t", list.get(i).getAvg());
+			System.out.print(list.get(i).getGrade() + "\n");
 		}
 	}
 
