@@ -11,7 +11,14 @@ public class EmpDTO {
 	private int salary;
 	private int commission;
 	private int dno;
+	private int bonus;
 	
+	public int getBonus() {
+		return bonus;
+	}
+	public void setBonus(int bonus) {
+		this.bonus = bonus;
+	}
 	public int getEno() {
 		return eno;
 	}

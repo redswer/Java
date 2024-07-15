@@ -146,4 +146,35 @@ public class ExamDAO {
 		
 		return list;
 	}
+	
+	public List<EmpDTO> bonus(int dno) {
+		Connection con = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		
+		String sql = "select eno, ename, salary, salary * 12 as bonus from emp where dno = ?";
+		List<EmpDTO> list = new ArrayList<>();
+		
+		try {
+			con = getConnection();
+			psmt = con.prepareStatement(sql);
+			psmt.setInt(1, dno);
+			rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				EmpDTO dto = new EmpDTO();
+				
+				dto.setEno(rs.getInt("eno"));
+				dto.setEname(rs.getString("ename"));
+				dto.setSalary(rs.getInt("salary"));
+				dto.setBonus(rs.getInt("bonus"));
+				
+				list.add(dto);
+			}
+		} catch (Exception e) {
+			
+		}
+		
+		return list;
+	}
 }
