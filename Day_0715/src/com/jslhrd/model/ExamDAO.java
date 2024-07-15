@@ -177,4 +177,138 @@ public class ExamDAO {
 		
 		return list;
 	}
+	
+	public EmpDTO find_bun(int bun) {
+		Connection con = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		
+		String sql = "select ename, dno from emp where eno = ?";
+		EmpDTO dto = new EmpDTO();
+		
+		try {
+			con = getConnection();
+			psmt = con.prepareStatement(sql);
+			psmt.setInt(1, bun);
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				dto.setEname(rs.getString("ename"));
+				dto.setDno(rs.getInt("dno"));
+			}
+		} catch (Exception e) {
+			
+		}
+		
+		return dto;
+	}
+	
+	public List<EmpDTO> find_commission(int com) {
+		Connection con = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		
+		String sql = "select ename, salary, commission from emp where commission >= ?";
+		List<EmpDTO> list = new ArrayList<>();
+		
+		try {
+			con = getConnection();
+			psmt = con.prepareStatement(sql);
+			psmt.setInt(1, com);
+			rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				EmpDTO dto = new EmpDTO();
+				
+				dto.setEname(rs.getString("ename"));
+				dto.setSalary(rs.getInt("salary"));
+				dto.setCommission(rs.getInt("commission"));
+				
+				list.add(dto);
+			}
+		} catch (Exception e) {
+			
+		}
+		
+		return list;
+	}
+	
+	public int dno_salary_sum(int dno) {
+		Connection con = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		
+		String sql = "select sum(salary) as sum from emp where dno = ?";
+		int sum = 0;
+		
+		try {
+			con = getConnection();
+			psmt = con.prepareStatement(sql);
+			psmt.setInt(1, dno);
+			rs = psmt.executeQuery();
+
+			if(rs.next()) {
+				sum = rs.getInt("sum");
+			}
+		} catch (Exception e) {
+			
+		}
+		
+		return sum;
+	}
+	
+	public List<Job_salaryDTO> job() {
+		Connection con = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		
+		String sql = "select job, max(salary) as max, min(salary) as min, sum(salary) as sum, round(avg(salary)) as avg from emp group by job";
+		List<Job_salaryDTO> list = new ArrayList<>();
+		
+		try {
+			con = getConnection();
+			psmt = con.prepareStatement(sql);
+			rs = psmt.executeQuery();
+
+			while(rs.next()) {
+				Job_salaryDTO js = new Job_salaryDTO();
+				
+				js.setJob(rs.getString("job")); 
+				js.setMax_salary(rs.getInt("max"));
+				js.setMin_salary(rs.getInt("min"));
+				js.setSum(rs.getInt("sum"));
+				js.setAvg(rs.getInt("avg"));
+				
+				list.add(js);
+			}
+		} catch (Exception e) {
+			
+		}
+		
+		return list;
+	}
+	
+	public List<String> find_name(String name) {
+		Connection con = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		
+		String sql = "select ename from emp where ename like ?";
+		List<String> list = new ArrayList<>();
+		
+		try {
+			con = getConnection();
+			psmt = con.prepareStatement(sql);
+			psmt.setString(1, "%" + name + "%");
+			rs = psmt.executeQuery();
+
+			while(rs.next()) {
+				list.add(rs.getString("ename"));
+			}
+		} catch (Exception e) {
+			
+		}
+		
+		return list;
+	}
 }
