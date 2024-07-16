@@ -27,7 +27,7 @@ public class EmpDAO {
 		PreparedStatement psmt = null;
 		ResultSet rs = null;
 		
-		String sql = "select count(dno) as count from emp";
+		String sql = "select count(*) as count from emp";
 		int count = 0;
 		
 		try {
@@ -75,7 +75,7 @@ public class EmpDAO {
 		List<DnoCountDTO> list = new ArrayList<>();
 		String dname = "";
 		
-		String sql = "select dno, count(*) as count from emp group by dno order by count(*)";
+		String sql = "select dno, count(*) as count from emp group by dno order by dno";
 		
 		try {
 			con = getConnection();

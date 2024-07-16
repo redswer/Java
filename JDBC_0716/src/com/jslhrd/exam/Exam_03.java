@@ -11,12 +11,17 @@ public class Exam_03 {
 		// 테이블에 존재하는 부서별 사원수를 구하여 출력(부서별 오름차순)
 		EmpDAO dao = new EmpDAO();
 		List<DnoCountDTO> list = dao.dnoCount();
+		int sum = 0;
 		
 		System.out.println("부서명\t사원수");
 		for (int i = 0; i < list.size(); i++) {
 			System.out.print(list.get(i).getDno() + "\t");
 			System.out.print(list.get(i).getCount() + "\n");
+			
+			sum += list.get(i).getCount();
 		}
+		
+		System.out.println("총 사원수 : " + sum);
 	}
 
 }
