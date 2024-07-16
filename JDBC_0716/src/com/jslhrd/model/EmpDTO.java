@@ -1,13 +1,11 @@
 package com.jslhrd.model;
 
-import java.util.Date;
-
 public class EmpDTO {
 	private int eno;
 	private String ename;
 	private String job;
 	private String manager;
-	private Date hiredate;
+	private String hiredate;
 	private int salary;
 	private int commission;
 	private int dno;
@@ -36,10 +34,10 @@ public class EmpDTO {
 	public void setManager(String manager) {
 		this.manager = manager;
 	}
-	public Date getHiredate() {
+	public String getHiredate() {
 		return hiredate;
 	}
-	public void setHiredate(Date hiredate) {
+	public void setHiredate(String hiredate) {
 		this.hiredate = hiredate;
 	}
 	public int getSalary() {

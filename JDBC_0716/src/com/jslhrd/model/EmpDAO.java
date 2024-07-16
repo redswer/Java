@@ -110,4 +110,35 @@ public class EmpDAO {
 		
 		return list;
 	}
+	
+	public List<EmpDTO> salaryOver(int salary) {
+		Connection con = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		List<EmpDTO> list = new ArrayList<>();
+		
+		String sql = "select eno, ename, hiredate, salary from emp where salary >= ? order by salary desc";
+		
+		try {
+			con = getConnection();
+			psmt = con.prepareStatement(sql);
+			psmt.setInt(1, salary);
+			rs = psmt.executeQuery();
+
+			while(rs.next()) {
+				EmpDTO dto = new EmpDTO();
+				
+				dto.setEno(rs.getInt("eno"));
+				dto.setEname(rs.getString("ename"));
+				dto.setHiredate(rs.getString("hiredate"));
+				dto.setSalary(rs.getInt("salary"));
+				
+				list.add(dto);
+			}
+		} catch (Exception e) {
+			
+		}
+		
+		return list;
+	}
 }
