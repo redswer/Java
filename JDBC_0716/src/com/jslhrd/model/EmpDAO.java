@@ -141,4 +141,36 @@ public class EmpDAO {
 		
 		return list;
 	}
+	
+	public List<EmpDTO> year(int year) {
+		Connection con = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		List<EmpDTO> list = new ArrayList<>();
+		
+		String sql = "select eno, ename, job, salary, dno from emp where substr(to_char(hiredate, 'yyyymmdd'), 1, 4) = ?";
+		
+		try {
+			con = getConnection();
+			psmt = con.prepareStatement(sql);
+			psmt.setInt(1, year);
+			rs = psmt.executeQuery();
+
+			while(rs.next()) {
+				EmpDTO dto = new EmpDTO();
+				
+				dto.setEno(rs.getInt("eno"));
+				dto.setEname(rs.getString("ename"));
+				dto.setJob(rs.getString("job"));
+				dto.setSalary(rs.getInt("salary"));
+				dto.setDno(rs.getInt("dno"));
+				
+				list.add(dto);
+			}
+		} catch (Exception e) {
+			
+		}
+		
+		return list;
+	}
 }
