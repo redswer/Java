@@ -9,6 +9,10 @@ public class MemberDTO {
 	private String grade;
 	private String city;
 	
+	private String cityname;
+	
+	private int sum;
+	
 	public int getCustno() {
 		return custno;
 	}
@@ -50,5 +54,17 @@ public class MemberDTO {
 	}
 	public void setCity(String city) {
 		this.city = city;
+	}
+	public int getSum() {
+		return sum;
+	}
+	public void setSum(int sum) {
+		this.sum = sum;
+	}
+	public String getCityname() {
+		return cityname;
+	}
+	public void setCityname(String cityname) {
+		this.cityname = cityname;
 	}
 }
