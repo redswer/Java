@@ -205,4 +205,124 @@ public class ArtistDAO {
 		
 		return list;
 	}
+	
+	public int pointModify(PointDTO dto) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		String sql = "update tbl_point_201905 set point = ? where serial_no = ?";
+		int row = 0;
+		
+		try {
+			con = getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, dto.getPoint());
+			pstmt.setInt(2, dto.getSerial_no());
+			row = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return row;
+	}
+	
+	public int[] deleteArtist(String artist_id) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		String sql1 = "delete from tbl_point_201905 where artist_id = ?";
+		String sql2 = "delete from tbl_artist_201905 where artist_id = ?";
+		int row1 = 0;
+		int row2 = 0;
+		int[] row = new int[2];
+		
+		try {
+			con = getConnection();
+			pstmt = con.prepareStatement(sql1);
+			pstmt.setString(1, artist_id);
+			row1 = pstmt.executeUpdate();
+			
+			pstmt = con.prepareStatement(sql2);
+			pstmt.setString(1, artist_id);
+			row2 = pstmt.executeUpdate();
+			
+			row[0] = row1;
+			row[1] = row2;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return row;
+	}
+	
+	public int deletePoint(int serial_no) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		String sql = "delete from tbl_point_201905 where serial_no = ?";
+		int row = 0;
+		
+		try {
+			con = getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, serial_no);
+			row = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return row;
+	}
+	
+	public List<ArtistDTO> rank() {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<ArtistDTO> list = new ArrayList<>();
+		
+		String sql = "select a.artist_id, a.artist_name, a.artist_gender, sum(b.point) as sum, round(avg(b.point), 2) as avg "
+				+ "from tbl_artist_201905 a, tbl_point_201905 b "
+				+ "where a.artist_id = b.artist_id "
+				+ "group by a.artist_id, a.artist_name, a.artist_gender "
+				+ "order by sum desc";
+		
+		try {
+			con = getConnection();
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				ArtistDTO dto = new ArtistDTO();
+				
+				dto.setArtist_id(rs.getString("artist_id"));
+				dto.setArtist_name(rs.getString("artist_name"));
+				
+				String gender = "남성";
+				if (rs.getString("artist_gender").equals("F")) {
+					gender = "여성";
+				}
+				dto.setArtist_gender(gender);
+				
+				dto.setSum(rs.getInt("sum"));
+				dto.setAvg(rs.getDouble("avg"));
+				dto.setRank(0);
+				
+				list.add(dto);
+			}
+			
+			for (int i = 0; i < list.size(); i++) {
+				int rank = 1;
+				for (int j = 0; j < list.size(); j++) {
+					if(list.get(i).getAvg() < list.get(j).getAvg()) {
+						rank ++;
+					}
+				}
+				list.get(i).setRank(rank);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
 }

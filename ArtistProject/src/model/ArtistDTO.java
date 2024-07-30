@@ -13,6 +13,10 @@ public class ArtistDTO {
 	private String grade;
 	private String mento_name;
 	
+	private int sum;
+	private double avg;
+	private int rank;
+	
 	public String getArtist_id() {
 		return artist_id;
 	}
@@ -72,5 +76,23 @@ public class ArtistDTO {
 	}
 	public void setMento_name(String mento_name) {
 		this.mento_name = mento_name;
+	}
+	public int getSum() {
+		return sum;
+	}
+	public void setSum(int sum) {
+		this.sum = sum;
+	}
+	public double getAvg() {
+		return avg;
+	}
+	public void setAvg(double avg) {
+		this.avg = avg;
+	}
+	public int getRank() {
+		return rank;
+	}
+	public void setRank(int rank) {
+		this.rank = rank;
 	}
 }
