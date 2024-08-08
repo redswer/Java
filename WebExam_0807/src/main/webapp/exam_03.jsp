@@ -83,7 +83,7 @@
 			<tr>
 				<td>연락처</td>
 				<td>
-					<select>
+					<select name="phone">
 						<option value="010">010</option>
 						<option value="02">02</option>
 						<option value="031">031</option>
@@ -115,7 +115,7 @@
 					<input name="email_adress" size="8">
 					<span>@</span>
 					<input id="emailDomainInput" name="email_domain" size="8" type="text">
-                    <select id="emailDomainSelect" name="email_domain" onchange="updateEmailDomain()">
+                    <select id="emailDomainSelect" name="email_domain_select" onchange="updateEmailDomain()">
 						<option>직접입력</option>
 						<option value="naver.com">naver.com</option>
 						<option value="nate.com">nate.com</option>
@@ -150,7 +150,7 @@
 			<tr>
 				<td>기타(한마디)</td>
 				<td>
-					<textarea rows="5" cols="50"></textarea>
+					<textarea rows="5" cols="50" name="etc"></textarea>
 				</td>
 			</tr>
 			<tr>
