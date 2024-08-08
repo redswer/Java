@@ -47,12 +47,62 @@
 	        emailDomainInput.readOnly = false;
 	    }
 	}
+	
+	function send() {
+		if(joinForm.userName.value == "") {
+			alert("이름 입력");
+			joinForm.userName.focus();
+			return;
+		}
+		
+		if(joinForm.userId.value == "") {
+			alert("아이디 입력");
+			joinForm.userId.focus();
+			return;
+		}
+		
+		if(joinForm.userPw.value == "") {
+			alert("비밀번호 입력");
+			joinForm.userPw.focus();
+			return;
+		}
+		
+		if(joinForm.userPw.value != joinForm.userPwCheck.value) {
+			alert("비멀번호 다름");
+			joinForm.userPwCheck.focus();
+			return;
+		}
+		
+		if(!joinForm.gender[0].checked && !joinForm.gender[1].checked) {
+			alert("성별 체크");
+			return;
+		}
+		
+		if(joinForm.job.selectedIndex == 0) {
+			alert("직업 선택");
+			return;
+		}
+		
+		flag = false;
+		for(i=0; i < joinForm.hobby.length; i++) {
+			if(joinForm.hobby[i].checked) {
+				flag = true;
+				break;
+			}
+		}
+		if(!flag) {
+			alert("관심분야 선택");
+			return;
+		}
+		
+		joinForm.submit();
+	}
 </script>
 <title>Insert title here</title>
 </head>
 <body>
 	<h1>회원 가입 페이지</h1>
-	<form action="form" method="post">
+	<form name="joinForm" action="exam_03_ok.jsp" method="post">
 		<table>
 			<tr>
 				<th colspan="2">회원 기본 정보</th>
@@ -67,23 +117,23 @@
 			</tr>
 			<tr>
 				<td>비밀번호</td>
-				<td><input name="userPw" type="password"></td>
+				<td><input id="userPw" name="userPw" type="password"></td>
 			</tr>
 			<tr>
 				<td>비밀번호확인</td>
-				<td><input name="userPwCheck" type="password"></td>
+				<td><input id="userPwCheck" name="userPwCheck" type="password"></td>
 			</tr>
 			<tr>
 				<td>성별</td>
 				<td>
-					<input name="gender" type="radio" value="male"> 남자
-					<input name="gender" type="radio" value="female"> 여자
+					<input name="gender" type="radio" value="M"> 남자
+					<input name="gender" type="radio" value="F"> 여자
 				</td>
 			</tr>
 			<tr>
 				<td>연락처</td>
 				<td>
-					<select name="phone">
+					<select name="phone1">
 						<option value="010">010</option>
 						<option value="02">02</option>
 						<option value="031">031</option>
@@ -104,18 +154,18 @@
 						<option value="064">064</option>
 					</select>
 					<span>-</span>
-					<input name="phone2" size="5">
+					<input name="phone2" size="4">
 					<span>-</span>
-					<input name="phone3" size="5">
+					<input name="phone3" size="4">
 				</td>
 			</tr>
 			<tr>
 				<td>이메일</td>
 				<td>
-					<input name="email_adress" size="8">
+					<input name="emailAddress" size="8">
 					<span>@</span>
-					<input id="emailDomainInput" name="email_domain" size="8" type="text">
-                    <select id="emailDomainSelect" name="email_domain_select" onchange="updateEmailDomain()">
+					<input id="emailDomainInput" name="emailDomain" size="8" type="text">
+                    <select id="emailDomainSelect" name="emailDomain" onchange="updateEmailDomain()">
 						<option>직접입력</option>
 						<option value="naver.com">naver.com</option>
 						<option value="nate.com">nate.com</option>
@@ -130,10 +180,12 @@
 				<td>
 					<select name="job">
 						<option>직업을 선택하세요</option>
-						<option value="">무직</option>
-						<option value="">회사원</option>
-						<option value="">자영업자</option>
-						<option value="">기타</option>
+						<option value="영업">영업</option>
+						<option value="공무원">공무원</option>
+						<option value="회사원">회사원</option>
+						<option value="교.강사">교.강사</option>
+						<option value="학생">학생</option>
+						<option value="기타">기타</option>
 					</select>
 				</td>
 			</tr>
@@ -155,8 +207,11 @@
 			</tr>
 			<tr>
 				<td colspan="2" id="button">
-					<input type="button" value="가입하기">
-					<input type="reset" value="돌아가기">
+					<input type="button" value="가입하기" onClick="send()">
+					&nbsp;&nbsp;
+					<input type="reset" value="다시쓰기">
+					&nbsp;&nbsp;
+					<input type="button" value="돌아가기" onclick="">
 				</td>
 			</tr>
 		</table>
