@@ -35,17 +35,13 @@
 </style>
 <script type="text/javascript">
 	function updateEmailDomain() {
-	    var domainSelect = document.getElementById("emailDomainSelect");
-	    var emailDomainInput = document.getElementById("emailDomainInput");
-	    var selectedDomain = domainSelect.value;
-	    
-	    if (selectedDomain !== "직접입력") {
-	        emailDomainInput.value = selectedDomain;
-	        emailDomainInput.readOnly = true;
-	    } else {
-	        emailDomainInput.value = "";
-	        emailDomainInput.readOnly = false;
-	    }
+		if(joinForm.emailDomainSelect.selectedIndex == 0) {
+			joinForm.emailDomainInput.value = "";
+			joinForm.emailDomainInput.readOnly = false;
+		} else {
+			joinForm.emailDomainInput.value = joinForm.emailDomainSelect.value;
+			joinForm.emailDomainInput.readOnly = true;
+		}
 	}
 	
 	function send() {
@@ -102,7 +98,8 @@
 </head>
 <body>
 	<h1>회원 가입 페이지</h1>
-	<form name="joinForm" action="exam_03_ok.jsp" method="post">
+	<!--<form name="joinForm" action="exam_03_ok.jsp" method="post">-->
+	<form name="joinForm" action="exam_03_ok2.jsp" method="post">
 		<table>
 			<tr>
 				<th colspan="2">회원 기본 정보</th>
