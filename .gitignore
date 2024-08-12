@@ -1,0 +1,20 @@
+.metadata/
+Servers/.project
+Servers/.settings/org.eclipse.core.resources.prefs
+Servers/.settings/org.eclipse.wst.server.core.prefs
+Servers/Tomcat v9.0 Server at localhost-config/catalina.policy
+Servers/Tomcat v9.0 Server at localhost-config/catalina.properties
+Servers/Tomcat v9.0 Server at localhost-config/context.xml
+Servers/Tomcat v9.0 Server at localhost-config/server.xml
+Servers/Tomcat v9.0 Server at localhost-config/tomcat-users.xml
+Servers/Tomcat v9.0 Server at localhost-config/web.xml
+WebExam_0812/.classpath
+WebExam_0812/.project
+WebExam_0812/.settings/.jsdtscope
+WebExam_0812/.settings/org.eclipse.core.resources.prefs
+WebExam_0812/.settings/org.eclipse.jdt.core.prefs
+WebExam_0812/.settings/org.eclipse.wst.common.component
+WebExam_0812/.settings/org.eclipse.wst.common.project.facet.core.xml
+WebExam_0812/.settings/org.eclipse.wst.jsdt.ui.superType.container
+WebExam_0812/.settings/org.eclipse.wst.jsdt.ui.superType.name
+WebExam_0812/src/main/webapp/META-INF/MANIFEST.MF
