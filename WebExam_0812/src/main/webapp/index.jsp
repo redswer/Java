@@ -9,5 +9,7 @@
 <body>
 	<h1>Index</h1>
 	<a href="product_insert.jsp">입출고 등록</a>
+	<br>
+	<a href="jdbctest.jsp">JDBC 연결</a>
 </body>
 </html>

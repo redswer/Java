@@ -18,3 +18,14 @@ WebExam_0812/.settings/org.eclipse.wst.common.project.facet.core.xml
 WebExam_0812/.settings/org.eclipse.wst.jsdt.ui.superType.container
 WebExam_0812/.settings/org.eclipse.wst.jsdt.ui.superType.name
 WebExam_0812/src/main/webapp/META-INF/MANIFEST.MF
+*.jar
+*.classpath
+*.gitignore
+*.project
+*.jsdtscope
+*.prefs
+*.component
+*.xml
+*.container
+*.name
+*.MF
