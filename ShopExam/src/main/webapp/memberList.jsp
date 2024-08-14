@@ -35,17 +35,22 @@
 		border: 1px solid black;
 		border-collapse: collapse;
 		margin: auto;
+		width: 800px;
 	}
 	
 	th, td {
 		border: 1px solid black;
 		padding: 5px
 	}
+	
+	td {
+		text-align: center;
+	}
 </style>
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>회원목록조회</h1>
+	<h1>회원목록조회/수정</h1>
 	<table>
 		<tr>
 			<th>회원번호</th>
