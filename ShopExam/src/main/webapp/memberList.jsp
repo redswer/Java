@@ -65,7 +65,7 @@
 			while (rs.next()) {
 		 %>
 		<tr>
-			<td><%= rs.getInt("custno") %></td>
+			<td><a href="memberModify.jsp?custno=<%= rs.getInt("custno") %>"><%= rs.getInt("custno") %></a></td>
 			<td><%= rs.getString("custname")%></td>
 			<td><%= rs.getString("phone") %></td>
 			<td><%= rs.getString("gender") %></td>
