@@ -100,7 +100,8 @@ public class ScoreDAO {
 	public List<StudentDTO> scoreList() {
 		String sql = "select a.hakbun, a.name, a.gender, b.kor, b.eng, b.mat, b.kor+b.eng+b.mat as sum, round((b.kor+b.eng+b.mat)/3, 1) as avg"
 				+ " from tbl_student_001 a, tbl_score_001 b"
-				+ " where a.hakbun = b.hakbun";
+				+ " where a.hakbun = b.hakbun"
+				+ " order by avg desc";
 		List<StudentDTO> list = new ArrayList<>();
 		
 		try {
@@ -119,6 +120,38 @@ public class ScoreDAO {
 				dto.setMat(rs.getInt("mat"));
 				dto.setSum(rs.getInt("sum"));
 				dto.setAvg(rs.getDouble("avg"));
+				
+				list.add(dto);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	
+	public List<ScoreDTO> gradeScoreList() {
+		String sql = "select substr(hakbun, 1, 1) as grade, sum(kor) as skor, sum(eng) as seng, sum(mat) as smat, round(avg(kor), 1) as akor, round(avg(eng), 1) as aeng, round(avg(mat), 1) as amat"
+				+ " from tbl_score_001"
+				+ " group by substr(hakbun, 1, 1)"
+				+ " order by grade";
+		List<ScoreDTO> list = new ArrayList<>();
+		
+		try {
+			con = DBManager.getConnection();
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				ScoreDTO dto = new ScoreDTO();
+				
+				dto.setGrade(rs.getString("grade"));
+				dto.setKor(rs.getInt("skor"));
+				dto.setEng(rs.getInt("seng"));
+				dto.setMat(rs.getInt("smat"));
+				dto.setKor_avg(rs.getDouble("akor"));
+				dto.setEng_avg(rs.getDouble("aeng"));
+				dto.setMat_avg(rs.getDouble("amat"));
 				
 				list.add(dto);
 			}

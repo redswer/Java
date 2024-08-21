@@ -74,7 +74,7 @@
 			<tr>
 				<th>학번</th>
 				<td>
-					<input name="hakbun">
+					<input name="hakbun" value="<%= request.getParameter("hakbun") %>">
 					<span>예)1101</span>
 				</td>
 			</tr>

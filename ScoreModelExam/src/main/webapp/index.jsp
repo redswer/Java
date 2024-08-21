@@ -12,6 +12,6 @@
 	<h3><a href="./Student/studentList.jsp">학생정보조회</a></h3>
 	<h3><a href="./Student/scoreInsert.jsp">성적정보등록</a></h3>
 	<h3><a href="./Student/scoreList.jsp">학생성적조회</a></h3>
-	<h3><a href="">학년성적조회</a></h3>
+	<h3><a href="./Student/gradeScoreList.jsp">학년성적조회</a></h3>
 </body>
 </html>

@@ -52,7 +52,7 @@
 			for(int i = 0; i < list.size(); i++) {
 		%>
 		<tr>
-			<td><a href="student"><%= list.get(i).getHakbun() %></a></td>
+			<td><a href="./scoreInsert.jsp?hakbun=<%= list.get(i).getHakbun() %>"><%= list.get(i).getHakbun() %></a></td>
 			<td><%= list.get(i).getName() %></td>
 			<td><%= list.get(i).getPhone1() + "-"  + list.get(i).getPhone2() + "-" + list.get(i).getPhone3() %></td>
 			<td><%= list.get(i).getGender().equals("M") ? "남자" : "여자" %></td>
