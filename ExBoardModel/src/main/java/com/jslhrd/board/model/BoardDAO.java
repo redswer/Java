@@ -36,6 +36,26 @@ public class BoardDAO {
 		}
 		return cnt;
 	}
+	
+	public int boardCount(String search, String key) {
+		int cnt = 0;
+		String sql="select count(*) from tbl_board where " + search + " like ?";
+		try {
+			conn = DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%" + key + "%");
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				cnt = rs.getInt(1);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBManager.close(conn, pstmt, rs);
+		}
+		return cnt;
+	}
+	
 	//게시글 전체 목록
 	public List<BoardDTO> boardList() {
 		List<BoardDTO> list = new ArrayList<BoardDTO>();
@@ -43,6 +63,31 @@ public class BoardDAO {
 		try {
 			conn = DBManager.getConnection();
 			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				BoardDTO dto = new BoardDTO();
+				dto.setIdx(rs.getInt("idx"));
+				dto.setName(rs.getString("name"));
+				dto.setSubject(rs.getString("subject"));
+				dto.setRegdate(rs.getString("regdate"));			
+				dto.setReadcnt(rs.getInt("readcnt"));
+				
+				list.add(dto);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBManager.close(conn, pstmt, rs);
+		}
+		return list;
+	}
+	public List<BoardDTO> boardList(String search, String key) {
+		List<BoardDTO> list = new ArrayList<BoardDTO>();
+		String sql="select * from tbl_board where " + search + " like ?" + "order by idx desc";
+		try {
+			conn = DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%" + key + "%");
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				BoardDTO dto = new BoardDTO();

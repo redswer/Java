@@ -2,9 +2,26 @@
 <%@ page import="com.jslhrd.board.model.*, java.util.*" %>
 
 <%
+	request.setCharacterEncoding("utf-8");
+
 	BoardDAO dao = BoardDAO.getInstance();
-	int count = dao.boardCount();
-	List<BoardDTO> list = dao.boardList();
+	List<BoardDTO> list = new ArrayList<>();
+	int count = 0;
+	
+	String search = "";
+	String key = "";
+	
+	if (request.getParameter("key") != null) {
+		search = request.getParameter("search");
+		key = request.getParameter("key");
+		
+		count =	dao.boardCount(search, key);
+		list = dao.boardList(search, key);
+	} else {
+		count = dao.boardCount();
+		list = dao.boardList();
+	}
+	
 %>
 <html>
 <head><title>게시판 읽기</title>
@@ -12,7 +29,17 @@
 <style type="text/css">
   a.list {text-decoration:none;color:black;font-size:10pt;}
 </style>
-
+<script type="text/javascript">
+	function bsearch() {
+		if (!search.key.value) {
+			alert("검색어를 입력하세요");
+			search.key.focus();
+			return
+		}
+		
+		search.submit();
+	}
+</script>
 </head>
 <body bgcolor="#FFFFFF" topmargin="0" leftmargin="0">
 <table border="0" width="800">
@@ -81,24 +108,26 @@
 			<td width="25%"> &nbsp;</td>
 			<td width="50%" align="center">
 				<table>
-					<form>	
+					<form name="search" method="post" action="board_list.jsp">	
 					<!-- 검색어를 이용하여 글제목, 작성자, 글내용 중에 하나를 입력 받아 처리하기 위한 부분 -->
 						<tr>
 							<td>
 								<select name="search">
-									<option value="">글제목</option>
-									<option value="">작성자</option>
-									<option value="">글내용</option>
+									<option value="subject" <% if (search.equals("subject")) { %> selected <% } %>>글제목</option>
+									<option value="name" <% if (search.equals("name")) { %> selected <% } %>>작성자</option>
+									<option value="contents" <% if (search.equals("contents")) { %> selected <% } %>>글내용</option>
 								</select>
 							</td>
-							<td> <input type="text" size=20 name=""></td>
-							<td> <a href="#"><img src="./img/search2.gif" border="0"></a></td>
+							<td> <input type="text" size=20 name="key" value="<%= key %>"></td>
+							<td> <a href="javascript:bsearch()"><img src="./img/search2.gif" border="0"></a></td>
 						</tr>
 					</form>
 				</table>
 			</td>
 			<td width="25%" align="right">
 			<a href="board_write.jsp"><img src="./img/write.gif" border="0"></a>
+			&nbsp;
+			<a href="board_list.jsp"><img src="./img/list.gif" border="0"></a>
 			</td>
 		</tr>
 	</table>
