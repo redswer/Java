@@ -3,10 +3,31 @@
 <%
 	request.setCharacterEncoding("utf-8");
 
-	GuestDAO dao = GuestDAO.getInstance();
 	int idx = Integer.parseInt(request.getParameter("idx"));
+	GuestDAO dao = GuestDAO.getInstance();
 	
-	dao.readCnt(idx);
+	boolean bool = false;
+	String newVal = "" + System.currentTimeMillis();
+	Cookie info = null;
+	Cookie cookies[] = request.getCookies();
+	
+	for (int i = 0; i < cookies.length; i++) {
+		info = cookies[i];
+		
+		if (info.getName().equals("guest" + idx)) {
+			bool = true;
+			break;
+		}
+	}
+	
+	if (!bool) {
+		dao.readCnt(idx);
+		
+		info = new Cookie("guest" + idx, newVal);
+		info.setMaxAge(24 * 60 * 60);
+		response.addCookie(info);
+	}
+	
 	GuestDTO dto = dao.guestSelect(idx);
 %>
 

@@ -49,6 +49,37 @@ public class GuestDAO {
 		return list;
 	}
 	
+	public List<GuestDTO> guestList(String search, String key) {
+		String sql = "select * from tbl_guest where " + search + " like ? order by idx desc";
+		List<GuestDTO> list = new ArrayList<>();
+		
+		try {
+			con = DBManager.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, "%" + key + "%");
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				GuestDTO dto = new GuestDTO();
+				
+				dto.setIdx(rs.getInt("idx"));
+				dto.setName(rs.getString("name"));
+				dto.setSubject(rs.getString("subject"));
+				dto.setContents(rs.getString("contents"));
+				dto.setRegdate(rs.getString("regdate"));
+				dto.setReadcnt(rs.getInt("readcnt"));
+				
+				list.add(dto);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(con, pstmt, rs);
+		}
+		
+		return list;
+	}
+	
 	public int guestInsert(GuestDTO dto) {
 		String sql = "insert into tbl_guest(idx, name, subject, contents) values(tbl_guest_seq_idx.nextval, ?, ?, ?)";
 		int row = 0;
