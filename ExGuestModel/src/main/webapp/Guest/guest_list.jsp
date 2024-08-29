@@ -1,6 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="com.jslhrd.guest.model.*, java.util.*" %>
 <%
+	request.setCharacterEncoding("utf-8");
+
 	GuestDAO dao = GuestDAO.getInstance();
 	List<GuestDTO> list = new ArrayList<>();
 	
@@ -44,12 +46,12 @@
     <br>
     <table border="0" cellspacing="1" width="100%" align="center">
       <tr>
-        <td colspan="7" align="center" valign="center" height="20">
+        <td colspan="7" align="center" valign="middle" height="20">
         <font size="4" face="돋움" color="blue">
         <img src="./img/bullet-01.gif"> <b>방 명 록</b></font></td></tr>
       <tr>
         <td colspan="5" align="right" valign="middle" height="20">
-		<font size="2" face="고딕">전체 : <%= list.size() %></b>건 - 3 Pages</font></td></tr>
+		<font size="2" face="고딕">전체 : <b><%= list.size() %></b>건 - 3 Pages</font></td></tr>
  	   <tr bgcolor="e3e9ff">
  	      <td width="10%"align="center" height="20"><font face="돋움" size="2">번호</font></td>
  	      <td width="50%" align="center" height="20"><font face="돋움" size="2">제목</font></td>
@@ -75,7 +77,7 @@
           <td align="center" height="25"><font face="돋움" size="2" color="#000000"><%= list.get(i).getIdx() %></font></td>
           <td align="left" height="20"><font face="돋움" size="2" color="#000000">
           	<a href="./guest_view.jsp?idx=<%= list.get(i).getIdx() %>"><%= list.get(i).getSubject() %></a>
-          </td>
+          </font></td>
           <td align="center" height="20"><font face="돋움" size="2"><%= list.get(i).getName() %></font></td>
           <td align="center" height="20"><font face="돋움" size="2"><%= list.get(i).getRegdate().substring(0,10) %></font></td>
           <td align="center" height="20"><font face="돋움" size="2"><%= list.get(i).getReadcnt() %></font></td>
@@ -122,6 +124,8 @@
 	</table>
 		
 		</div>
+	</table>
+	</table>
 	</body>
 	</html>
 
