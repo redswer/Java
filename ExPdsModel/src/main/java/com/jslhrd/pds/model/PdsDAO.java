@@ -119,4 +119,49 @@ public class PdsDAO {
 		
 		return dto;
 	}
+	
+	public int pdsModify(PdsDTO dto) {
+		String sql = "update tbl_pds set email = ?, subject = ?, contents = ?, filename = ? where idx = ? and pass = ?";
+		int row = 0;
+		
+		try {
+			conn = DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, dto.getEmail());
+			pstmt.setString(2, dto.getSubject());
+			pstmt.setString(3, dto.getContents());
+			pstmt.setString(4, dto.getFilename());
+			pstmt.setInt(5, dto.getIdx());
+			pstmt.setString(6, dto.getPass());
+			
+			
+			row = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, pstmt);
+		}
+		
+		return row;
+	}
+	
+	public int pdsDelete(int idx, String pass) {
+		String sql = "delete from tbl_pds where idx = ? and pass = ?";
+		int row = 0;
+		
+		try {
+			conn = DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, idx);
+			pstmt.setString(2, pass);
+			
+			row = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, pstmt);
+		}
+		
+		return row;
+	}
 }

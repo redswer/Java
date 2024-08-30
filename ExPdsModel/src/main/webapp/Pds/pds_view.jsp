@@ -51,15 +51,15 @@
 				<p align="right"><font size="2" face="돋움">  <%= dto.getName() %> / <%= dto.getRegdate().substring(0, 10) %> / <%= dto.getReadcnt() %>번 읽음
 			    <p><%= dto.getContents().replace("\n", "<br>") %><p>
 			    <% if (dto.getFilename() != null) { %>
-				<img src="./img/disk.gif" align="middle" width="22" height="20" border="0">&nbsp;<%= dto.getFilename() %></font>
+				<img src="./img/disk.gif" align="middle" width="22" height="20" border="0">&nbsp;<a href="upload/<%= dto.getFilename() %>"><%= dto.getFilename() %></a></font>
 				<% } %>
 			</td>
 		</tr>
 	  </table>
 	  <p align="center">
 	  <font size="2">
-		<img src="./img/edit-1.gif" border="0">&nbsp;&nbsp;&nbsp;&nbsp;
-		<img src="./img/del.gif" border="0">&nbsp;&nbsp;&nbsp;&nbsp;
+		<a href="pds_modify.jsp?idx=<%= dto.getIdx() %>"><img src="./img/edit-1.gif" border="0"></a>&nbsp;&nbsp;&nbsp;&nbsp;
+		<a href="pds_delete.jsp?idx=<%= dto.getIdx() %>"><img src="./img/del.gif" border="0"></a>&nbsp;&nbsp;&nbsp;&nbsp;
 		<a href="./pds_list.jsp"><img src="./img/list-2.gif" border="0"></a>
 	  </font>
      </td>
