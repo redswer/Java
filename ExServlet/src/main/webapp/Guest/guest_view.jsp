@@ -14,6 +14,12 @@
      td.content { padding:10px; line-height:1.6em; text-align:justify; }
      a.list { text-decoration:none;color:black;font-size:10pt; }
    </style>
+   <script type="text/javascript">
+	function guest_delete() {
+		var url = "guest_delete?idx=${dto.idx}";
+		window.open(url, "guest_delete", "width=500, height = 250, top=150, left=500");
+	}
+   </script>
  </head>
  <body topmargin="0" leftmargin="0">
    <table border="0" width="800">
@@ -35,15 +41,15 @@
          <tr bgcolor="e3e9ff">
            <td class="title">
              <img src="Guest/img/bullet-04.gif"> <font size="2" face="돋움">
-                  <%= dto.getSubject() %></font>
+                  ${ dto.subject }</font>
            </td>
          </tr>
          <tr>
            <td class="content">
              <p align="right"><font size="2" face="돋움">
-              <%= dto.getName() %>  / <font size="2" face="돋움"><%= dto.getRegdate().substring(0, 10) %> / <%= dto.getReadcnt() %>번 읽음</font>
+              ${ dto.name }  / <font size="2" face="돋움">${ dto.regdate } / ${ dto.readcnt }번 읽음</font>
              <p>
-             <%= dto.getContents().replace("\n", "<br>") %><p>
+             ${ dto.contents }<p>
            </td>
          </tr>
        </table>
@@ -53,6 +59,10 @@
       <font size="2">
        <!-- 목록보기 -->
        <a href="/guest_list"><img src="Guest/img/list-2.gif" border="0"></a>&nbsp;&nbsp;&nbsp;&nbsp;
+      <!-- 수정 -->
+       <a href="/guest_modify?idx=${dto.idx}"><img src="Guest/img/edit.gif" border="0"></a>&nbsp;&nbsp;&nbsp;&nbsp;
+      <!-- 삭제 -->
+       <a href="javascript:guest_delete()"><img src="Guest/img/del.gif" border="0"></a>&nbsp;&nbsp;&nbsp;&nbsp;
       <!-- 글쓰기 -->
        <a href="/guest_write"><img src="Guest/img/write.gif" border="0"></a>
       </font>

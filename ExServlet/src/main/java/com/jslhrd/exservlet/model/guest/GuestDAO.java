@@ -122,6 +122,8 @@ public class GuestDAO {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			DBManager.close(con, pstmt, rs);
 		}
 		
 		return dto;
@@ -153,6 +155,48 @@ public class GuestDAO {
 			pstmt.setString(2, dto.getSubject());
 			pstmt.setString(3, dto.getContents());
 			pstmt.setString(4, dto.getPass());
+			row = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(con, pstmt);
+		}
+		
+		return row;
+	}
+	
+	public int guestDelete(int idx, String pass) {
+		String sql = "delete from tbl_guest where idx = ? and pass = ?";
+		int row = 0;
+		
+		try {
+			con = DBManager.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, idx);
+			pstmt.setString(2, pass);
+			
+			row = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(con, pstmt);
+		}
+		
+		return row;
+	}
+	
+	public int guestModify(GuestDTO dto) {
+		String sql = "update tbl_guest set subject = ?, contents = ? where idx = ? and pass = ?";
+		int row = 0;
+		
+		try {
+			con = DBManager.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, dto.getSubject());
+			pstmt.setString(2, dto.getContents());
+			pstmt.setInt(3, dto.getIdx());
+			pstmt.setString(4, dto.getPass());
+			
 			row = pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();

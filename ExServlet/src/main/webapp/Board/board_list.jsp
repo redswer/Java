@@ -55,7 +55,7 @@
 			<font face="돋움" size="2" color="#000000"></font><%= list.get(i).getIdx() %></td>
 			<td align="left" height="20">&nbsp;
 				<font face="돋움" size="2" color="#000000">
-				<a class="list" href=""><%= list.get(i).getSubject() %></a></td>
+				<a class="list" href="/board_view?idx=<%= list.get(i).getIdx() %>"><%= list.get(i).getSubject() %></a></td>
 					<td align="center" height="20"><font face="돋움" size="2">
 					<a class="list" href="<%= list.get(i).getEmail() %>"><%= list.get(i).getName() %></a></font></td>
 				<td align="center" height="20"><font face="돋움" size="2"><%= list.get(i).getRegdate().substring(0, 10) %></font></td>
