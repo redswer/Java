@@ -14,9 +14,9 @@ td   { font-family: 돋움, Verdana; font-size: 9pt; text-decoration: none; colo
 <BODY bgcolor="#FFFFFF">
 <TABLE CELLPADDING=0 CELLSPACING=0 BORDER=0 WIDTH=330>
   <TR BGCOLOR=#7AAAD5>
-    <td align=left><img src="./img/u_b02.gif"></td>
+    <td align=left><img src="User/img/u_b02.gif"></td>
     <td align=center><FONT COLOR="#FFFFFF"><b>아이디 중복 체크</FONT></td>
-    <td align=right><img src="./img/u_b03.gif"></td>
+    <td align=right><img src="User/img/u_b03.gif"></td>
   </tr>
 </table>
 <TABLE CELLPADDING=0 CELLSPACING=0 BORDER=0 WIDTH=330>
@@ -32,7 +32,7 @@ td   { font-family: 돋움, Verdana; font-size: 9pt; text-decoration: none; colo
     	<BR><FONT COLOR="#483cae"><b>abcd</b></FONT>는 이미 사용 중인 아이디입니다<br>
     	다른 아이디를 사용하여 주십시오.
            <INPUT NAME=user_id type=text size=16 maxlength=16>
-      	   <input type=image src="./img/u_bt08.gif" border=0 vspace=0>
+      	   <input type=image src="User/img/u_bt08.gif" border=0 vspace=0>
 
         </TD>
       </TR>
@@ -43,12 +43,12 @@ td   { font-family: 돋움, Verdana; font-size: 9pt; text-decoration: none; colo
 
 <TABLE CELLPADDING=0 CELLSPACING=0 BORDER=0 WIDTH=330>
   <TR BGCOLOR=#7AAAD5>
-    <td align=left><img src="./img/u_b04.gif"></td>
-    <td align=right><img src="./img/u_b05.gif"></td>
+    <td align=left><img src="User/img/u_b04.gif"></td>
+    <td align=right><img src="User/img/u_b05.gif"></td>
   </tr>
   <tr>
     <td colspan=3 align=center>
-      <img src="./img/u_bt13.gif" border=0 vspace=5>
+      <img src="User/img/u_bt13.gif" border=0 vspace=5>
     </td>
   </tr>
 </table>

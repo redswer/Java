@@ -20,12 +20,30 @@
        </b></font>
      </td>
      <td bgcolor="#9966ff" width="10%" height="25" onmouseover="style.backgroundColor='#2772D3'" onmouseout="style.backgroundColor=''">
-     <p align="center"><font color="white" size="2"><b><a href="" class="white">로그인</A></b></font></p>
-     <p align="center"><font color="white" size="2"><b><a href="" class="white">로그아웃</A></b></font></p>
+     <%
+     	if (session.getAttribute("user") == null) {
+     %>
+     <p align="center"><font color="white" size="2"><b><a href="user_login" class="white">로그인</A></b></font></p>
+     <%
+     	} else {
+     %>
+     <p align="center"><font color="white" size="2"><b><a href="user_logout" class="white">로그아웃</A></b></font></p>
+     <%
+     	}
+     %>
      </td>
      <td bgcolor="#9966ff" width="10%" onmouseover="style.backgroundColor='#2772D3'" onmouseout="style.backgroundColor=''">
-     <p align="center"><font color="white" size="2"><b><a href="" class="white">회원가입</a></b></font></p>
+     <%
+     	if (session.getAttribute("user") == null) {
+     %>
+     <p align="center"><font color="white" size="2"><b><a href="user_insert" class="white">회원가입</a></b></font></p>
+     <%
+     	} else {
+     %>
      <p align="center"><font color="white" size="2"><b><a href="" class="white">정보수정</a></b></font></p>
+     <%
+     	}
+     %>
      </td>
      <td bgcolor="#9966ff" width="10%" onmouseover="style.backgroundColor='#2772D3'" onmouseout="style.backgroundColor=''">
      <p align="center"><font color="white" size="2"><b>공지사항</b></font></p>

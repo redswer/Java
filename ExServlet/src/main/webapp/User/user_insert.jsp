@@ -13,10 +13,41 @@ td   { font-family: 돋움, Verdana; font-size: 9pt; text-decoration: none; colo
 } 
 --->
 </STYLE>
+<script type="text/javascript">
+	function send() {
+		if (!user.name.value) {
+			alert("이름을 입력하세요");
+			user.name.focus();
+			return;
+		}
+		if (!user.userid.value) {
+			alert("아이디를 입력하세요");
+			user.userid.focus();
+			return;
+		}
+		if (!user.passwd.value) {
+			alert("비밀번호를 입력하세요");
+			user.passwd.focus();
+			return;
+		}
+		if(user.passwd.value != user.repasswd.value) {
+			alert("비밀번호가 다릅니다");
+			user.repasswd.focus();
+			return;
+		}
+		if (!user.tel.value) {
+			alert("전화번호를 입력하세요");
+			user.tel.focus();
+			return;
+		}
+		
+		user.submit();
+	}
+</script>
 </head>
 
 <body bgcolor="#FFFFFF" LEFTMARGIN=0  TOPMARGIN=0 >
- 
+<%@ include file="/Include/topmenu.jsp" %>
  <!-- 탑 메뉴 영역 삽입-->
 
 
@@ -24,11 +55,12 @@ td   { font-family: 돋움, Verdana; font-size: 9pt; text-decoration: none; colo
 <tr>
   <td width="20%"  bgcolor="#ecf1ef" valign="top" style="padding-left:0;">
 	
+ <%@ include file="/Include/login_form.jsp" %>
 	<!--로그인 영역 삽입-->
 
   </td>
-  <td width="80%" valign="top">&nbsp;<img src="./img/title1.gif" ><br>    
-	<form name=form_name method=post>
+  <td width="80%" valign="top">&nbsp;<img src="User/img/title1.gif" ><br>    
+	<form name="user" method="post" action="user_insert">
 	<table border=0 cellpadding=0 cellspacing=0 border=0 width=730 valign=top>
 		<tr><td align=center><br>                            
 			<table cellpadding=0 cellspacing=0 border=0 width=650 align=center>       
@@ -36,9 +68,9 @@ td   { font-family: 돋움, Verdana; font-size: 9pt; text-decoration: none; colo
 					<td bgcolor="#7AAAD5">            
 						<table cellpadding=0 cellspacing=0 border=0 width=100%>
 							<tr bgcolor=#7AAAD5>
-								<td align=left BORDER="0" HSPACE="0" VSPACE="0"><img src="./img/u_b02.gif"></td>
+								<td align=left BORDER="0" HSPACE="0" VSPACE="0"><img src="User/img/u_b02.gif"></td>
 								<td align=center bgcolor="#7AAAD5"><FONT COLOR="#FFFFFF"><b>사용자등록&nbsp;</b><font color=black>(</font><font color=red>&nbsp;*&nbsp;</font><font color=black>표시항목은 반드시 입력하십시요.)</font></FONT></td>
-								<td align=right BORDER="0" HSPACE="0" VSPACE="0"><img src="./img/u_b03.gif"></td>
+								<td align=right BORDER="0" HSPACE="0" VSPACE="0"><img src="User/img/u_b03.gif"></td>
 							</tr>
 						</table>
 						<table cellpadding=3 cellspacing=1 border=0 width=100%>
@@ -57,7 +89,7 @@ td   { font-family: 돋움, Verdana; font-size: 9pt; text-decoration: none; colo
 												<input type=text name=userid size=12 maxlength=16 value="" style="width:120">
 											</td>
 											<td>
-                  								<img src="./img/u_bt01.gif" hspace=2 border=0 name=img1  align=absmiddle>
+                  								<img src="User/img/u_bt01.gif" hspace=2 border=0 name=img1  align=absmiddle>
                    									5~16자 이내의 영문이나 숫자만 가능합니다.
                   							</td>
 										</tr>
@@ -102,17 +134,17 @@ td   { font-family: 돋움, Verdana; font-size: 9pt; text-decoration: none; colo
 						<table cellpadding=0 cellspacing=0 border=0 width=100%>
 							<tr bgcolor=#7AAAD5>
 								<td valign=bottom>
-									<img src="./img/u_b04.gif" align=left hspace=0 vspace=0 border=0>
+									<img src="User/img/u_b04.gif" align=left hspace=0 vspace=0 border=0>
 								</td>
 								<td align=center></td>
 								<td valign=bottom>
-									<img src="./img/u_b05.gif" align=right hspace=0 vspace=0 border=0>
+									<img src="User/img/u_b05.gif" align=right hspace=0 vspace=0 border=0>
 								</td>
 							</tr>
 							<tr bgcolor=#ffffff>
 								<td colspan=3 align=center>
-									<img src="./img/u_bt06.gif" vspace=3 border=0 name=img3>
-									<img src="./img/u_bt05.gif" border=0 hspace=10 vspace=3 name=img4>
+									<img src="User/img/u_bt06.gif" vspace=3 border=0 name=img3 onClick="send()">
+									<img src="User/img/u_bt05.gif" border=0 hspace=10 vspace=3 name=img4 onClick="reset()">
 								</td>
 							</tr>
 						</table> 
