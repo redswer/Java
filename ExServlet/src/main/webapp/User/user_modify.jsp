@@ -1,8 +1,11 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-
+<%@ page import="com.jslhrd.exservlet.model.user.*" %>
+<%
+	String email[] = ((UserDTO)session.getAttribute("user")).getEmail().split("@");
+%>
 <html>
 <head>
-<title>회원등록</title>
+<title>회원정보수정</title>
 <STYLE TYPE="text/css">
 <!--
 body { font-family: 돋움, Verdana; font-size: 9pt}
@@ -14,21 +17,7 @@ td   { font-family: 돋움, Verdana; font-size: 9pt; text-decoration: none; colo
 --->
 </STYLE>
 <script type="text/javascript">
-	function id_check() {
-		window.open("/user_id_check", "id_check", "width=350, height=250, top=100, left=500");
-	}
-
 	function send() {
-		if (!user.name.value) {
-			alert("이름을 입력하세요");
-			user.name.focus();
-			return;
-		}
-		if (!user.userid.value) {
-			alert("아이디를 입력하세요");
-			user.userid.focus();
-			return;
-		}
 		if (!user.passwd.value) {
 			alert("비밀번호를 입력하세요");
 			user.passwd.focus();
@@ -65,7 +54,7 @@ td   { font-family: 돋움, Verdana; font-size: 9pt; text-decoration: none; colo
 
   </td>
   <td width="80%" valign="top">&nbsp;<img src="User/img/title1.gif" ><br>    
-	<form name="user" method="post" action="user_insert">
+	<form name="user" method="post" action="user_modify">
 	<table border=0 cellpadding=0 cellspacing=0 border=0 width=730 valign=top>
 		<tr><td align=center><br>                            
 			<table cellpadding=0 cellspacing=0 border=0 width=650 align=center>       
@@ -74,29 +63,25 @@ td   { font-family: 돋움, Verdana; font-size: 9pt; text-decoration: none; colo
 						<table cellpadding=0 cellspacing=0 border=0 width=100%>
 							<tr bgcolor=#7AAAD5>
 								<td align=left BORDER="0" HSPACE="0" VSPACE="0"><img src="User/img/u_b02.gif"></td>
-								<td align=center bgcolor="#7AAAD5"><FONT COLOR="#FFFFFF"><b>사용자등록&nbsp;</b><font color=black>(</font><font color=red>&nbsp;*&nbsp;</font><font color=black>표시항목은 반드시 입력하십시요.)</font></FONT></td>
+								<td align=center bgcolor="#7AAAD5"><FONT COLOR="#FFFFFF"><b>사용자정보수정&nbsp;</b><font color=black>(</font><font color=red>&nbsp;*&nbsp;</font><font color=black>표시항목은 반드시 입력하십시요.)</font></FONT></td>
 								<td align=right BORDER="0" HSPACE="0" VSPACE="0"><img src="User/img/u_b03.gif"></td>
 							</tr>
 						</table>
 						<table cellpadding=3 cellspacing=1 border=0 width=100%>
 							<tr>
-								<td width=110 bgcolor=#EFF4F8>&nbsp;회원 성명<font color=red>&nbsp;*</font></td>
+								<td width=110 bgcolor=#EFF4F8>&nbsp;회원 성명<font color=red>&nbsp;</font></td>
 								<TD BGCOLOR=WHITE>
-									<input type=text name=name size=16 maxlength=20 value="">성명은 빈칸없이 입력하세요.
+									<input type=text name=name size=16 maxlength=20 value="${user.name}" readOnly>
 								</td>
 							</tr>
 							<tr>
-								<TD BGCOLOR="#EFF4F8">&nbsp;회원 ID<font color=red>&nbsp;*</font></td>
+								<TD BGCOLOR="#EFF4F8">&nbsp;회원 ID<font color=red>&nbsp;</font></td>
 								<TD BGCOLOR=WHITE>
 									<table cellspacing=0 cellpadding=0>
 										<tr>
 											<td align=absmiddle>
-												<input type=text name=userid size=12 maxlength=16 value="" style="width:120" value="" readOnly>
+												<input type=text name=userid size=12 maxlength=16 style="width:120" value="${user.userid}" readOnly>
 											</td>
-											<td>
-                  								<img src="User/img/u_bt01.gif" hspace=2 border=0 name=img1  align=absmiddle onClick="id_check()">
-                   									5~16자 이내의 영문이나 숫자만 가능합니다.
-                  							</td>
 										</tr>
 									</table>
 								</td>
@@ -115,7 +100,7 @@ td   { font-family: 돋움, Verdana; font-size: 9pt; text-decoration: none; colo
 							<tr>
 								<TD BGCOLOR="#EFF4F8">&nbsp;전화번호<font color=red>&nbsp;*</font></td>
 								<TD BGCOLOR=WHITE>
-									<input type=text name=tel size=13 maxlength=13 value="">
+									<input type=text name=tel size=13 maxlength=13 value="${user.tel}">
 								</td>
 							</tr>
 							<tr>
@@ -123,8 +108,8 @@ td   { font-family: 돋움, Verdana; font-size: 9pt; text-decoration: none; colo
                 					<font color=red>&nbsp;</font>
 								</td>
 								<td bgcolor=WHITE valign=middle>
-									<input type="text" name="email1" size=13 maxlength="15">
-									@ <input type="text" name="email2" size=13 maxlength="15">
+									<input type="text" name="email1" size=13 maxlength="15" value="<%= email[0] %>">
+									@ <input type="text" name="email2" size=13 maxlength="15" value="<%= email[1] %>">
 									<select name="email2">
 		      							<option value="0">직접입력</option>
 		      							<option value="naver.com">naver.com</option>

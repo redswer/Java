@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet("/user_logout")
 public class UserLogoutServlet extends HttpServlet {
@@ -18,7 +19,10 @@ public class UserLogoutServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("User/user_logout.jsp");
+		HttpSession session = request.getSession();
+		session.invalidate();
+		
+		RequestDispatcher rd = request.getRequestDispatcher("/User/user_login.jsp");
 		rd.forward(request, response);
 	}
 

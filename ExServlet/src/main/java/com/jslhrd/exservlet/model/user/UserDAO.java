@@ -90,6 +90,8 @@ public class UserDAO {
 				dto.setName(rs.getString("name"));
 				dto.setEmail(rs.getString("email"));
 				dto.setTel(rs.getString("tel"));
+				dto.setFirst_time(rs.getString("first_time"));
+				dto.setLast_time(rs.getString("last_time"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -98,5 +100,49 @@ public class UserDAO {
 		}
 		
 		return dto;
+	}
+	
+	public int userIdCheck(String userid) {
+		String sql = "select count(*) from tbl_user where userid = ?";
+		int row = 0;
+		
+		try {
+			con = DBManager.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, userid);
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				row = rs.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(con, pstmt, rs);
+		}
+		
+		return row;
+	}
+	
+	public int userModify(UserDTO dto) {
+		String sql = "update tbl_user set passwd = ?, tel = ?, email = ?, last_time = sysdate where userid = ?";
+		int row = 1;
+		
+		try {
+			con = DBManager.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, dto.getPasswd());
+			pstmt.setString(2, dto.getTel());
+			pstmt.setString(3, dto.getEmail());
+			pstmt.setString(4, dto.getUserid());
+			
+			row = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(con, pstmt);
+		}
+		
+		return row;
 	}
 }

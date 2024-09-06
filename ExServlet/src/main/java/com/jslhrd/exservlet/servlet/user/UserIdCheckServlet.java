@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.jslhrd.exservlet.model.user.UserDAO;
+
 @WebServlet("/user_id_check")
 public class UserIdCheckServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -23,6 +25,14 @@ public class UserIdCheckServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String userid = request.getParameter("userid");
+		UserDAO dao = UserDAO.getInstance();
+		
+		int row = dao.userIdCheck(userid);
+		
+		request.setAttribute("row", row);
+		request.setAttribute("userid", userid);
+		
 		doGet(request, response);
 	}
 

@@ -14,46 +14,44 @@ import com.jslhrd.exservlet.model.user.UserDAO;
 import com.jslhrd.exservlet.model.user.UserDTO;
 import com.jslhrd.exservlet.util.UserSHA256;
 
-@WebServlet("/user_login")
-public class UserLoginServlet extends HttpServlet {
+@WebServlet("/user_modify")
+public class UserModifyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public UserLoginServlet() {
+    public UserModifyServlet() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		
-		if (session.getAttribute("user") != null) {
-			response.sendRedirect("/index");
-		} else {
-			RequestDispatcher rd = request.getRequestDispatcher("/User/user_login.jsp");
-			rd.forward(request, response);
-		}
+		RequestDispatcher rd = request.getRequestDispatcher("/User/user_modify.jsp");
+		rd.forward(request, response);
 		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		
 		UserDAO dao = UserDAO.getInstance();
+		UserDTO dto = new UserDTO();
 		
-		String userid = request.getParameter("userid");
-		String passwd = UserSHA256.getSHA256(request.getParameter("passwd"));
+		dto.setUserid(request.getParameter("userid"));
+		dto.setPasswd(UserSHA256.getSHA256(request.getParameter("passwd")));
+		dto.setTel(request.getParameter("tel"));
+		dto.setEmail(request.getParameter("email1") + "@" + request.getParameter("email2"));
 		
-		int row = dao.login(userid, passwd);
+		int row = dao.userModify(dto);
 		
-		if (row == 1) {
-			UserDTO dto = dao.userSelect(userid);
-			HttpSession session = request.getSession();
-			session.setAttribute("user", dto);
-			session.setMaxInactiveInterval(30 * 60);
-			
-		}
+//		dto = dao.userSelect(request.getParameter("userid"));
+//		HttpSession session = request.getSession();
+//		session.setAttribute("user", dto);
+//		session.setMaxInactiveInterval(30 * 60);
+		
+		HttpSession session = request.getSession();
+		session.invalidate();
 		
 		request.setAttribute("row", row);
 		
-//		RequestDispatcher rd = request.getRequestDispatcher("/User/user_login_pro.jsp");
-		RequestDispatcher rd = request.getRequestDispatcher("/User/user_login_ok.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/User/user_modify_pro.jsp");
 		rd.forward(request, response);
 	}
 
