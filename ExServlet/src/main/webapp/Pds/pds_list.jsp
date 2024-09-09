@@ -1,12 +1,32 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
+<%@ include file="/Include/topmenu.jsp" %>
+<%@ page import="com.jslhrd.exservlet.model.pds.*, java.util.*" %>
 
+<%
+	List<PdsDTO> list = (List)request.getAttribute("list");
+	String search = (String)request.getAttribute("search");
+	String key = (String)request.getAttribute("key");
+%>
 <html>
    <head>
       <title> 자료실 리스트 보기 </title>
 	<link rel="stylesheet" type="text/css" href="stylesheet.css">
 	<style type="text/css">
 		a.list {text-decoration:none;color:black;font-size:10pt;}
+		a {text-decoration: none; color: black;}
 	</style>
+	
+	<script type="text/javascript">
+		function send() {
+			if (!pds.key.value) {
+				alert("검색어를 입력하세요");
+				pds.key.focus();
+				return;
+			}
+			
+			pds.submit();
+		}
+	</script>
    </head> 
 
 <!-- 제목 부분 출력 -->
@@ -14,7 +34,7 @@
   <table border="0" width="800">
     <tr>
       <td width="20%" height="500" valign="top" bgcolor="#ecf1ef">
-
+<%@ include file="/Include/login_form.jsp" %>
 <!--  다음에 추가할 부분 -->
 </td>
 
@@ -24,10 +44,11 @@
       <tr>
         <td colspan="7" align="center" valign="center" height="20">
         <font size="4" face="돋움" color="blue">
-        <img src="./img/bullet-01.gif"> <b>참 좋은 자료들</b></font></td></tr>
+        <img src="Pds/img/bullet-01.gif"> <b>참 좋은 자료들</b></font></td>
+      </tr>
       <tr>
         <td colspan="7" align="right" valign="middle" height="20">
-		  <font size="2" face="고딕">전체 : <b>5</b>건 </font>
+		  <font size="2" face="고딕">전체 : <b>${cnt}</b>건 </font>
 		</td>
 	  </tr>
 	  <tr bgcolor="e3e9ff">
@@ -37,26 +58,21 @@
         <td width="10%" align="center" height="20"><font face="돋움" size="2">올린이</font></td>
         <td width="11%" align="center" height="20"><font face="돋움" size="2">날짜</font></td>
         <td width="5%" align="center" height="20"><font face="돋움" size="2">조회</font></td></tr>
-
+	  <%
+	  	for(int i = 0; i < list.size(); i++) {
+	  %>
       <tr onMouseOver="style.backgroundColor='#D1EEEE'" onMouseOut="style.backgroundColor=''">
         <td align="center" height="25">
-        <font face="돋움" size="2" color="#000000">15</font></td>
-		<td align="left" height="20">&nbsp;<font face="돋움" size="2">좋은하루 되세요</font></td>
-        <td align="center" height="20"><font face="돋움" size="2">test.zip</td>
-		<td align="left" height="20"><font face="돋움" size="2">홍길동</font></td>
-		<td align="left" height="20"><font face="돋움" size="2">2007-10-11</font></td>
-		<td align="center" height="20"><font face="돋움" size="2">1</font></td> 	      
-	  </tr>  	   
-      <tr onMouseOver="style.backgroundColor='#D1EEEE'" onMouseOut="style.backgroundColor=''">
-        <td align="center" height="25">
-        <font face="돋움" size="2" color="#000000">14</font></td>
-		<td align="left" height="20">&nbsp;<font face="돋움" size="2">우리들의 이야기</font></td>
-        <td align="center" height="20"><font face="돋움" size="2">&nbsp;</td>
-		<td align="left" height="20"><font face="돋움" size="2">홍길동</font></td>
-		<td align="left" height="20"><font face="돋움" size="2">2007-10-09</font></td>
-		<td align="center" height="20"><font face="돋움" size="2">3</font></td> 	      
+        <font face="돋움" size="2" color="#000000"><%= list.get(i).getIdx() %></font></td>
+		<td align="left" height="20"><a href="/pds_view?idx=<%= list.get(i).getIdx() %>">&nbsp;<font face="돋움" size="2"><%= list.get(i).getSubject() %></font></a></td>
+        <td align="center" height="20"><font face="돋움" size="2">&nbsp;<%= list.get(i).getFilename() %></td>
+		<td align="left" height="20"><font face="돋움" size="2"><%= list.get(i).getName() %></font></td>
+		<td align="left" height="20"><font face="돋움" size="2"><%= list.get(i).getRegdate().substring(0, 10) %></font></td>
+		<td align="center" height="20"><font face="돋움" size="2"><%= list.get(i).getReadcnt() %></font></td> 	      
 	  </tr>  	
-	  
+	  <%
+	  	}
+	  %>
       <tr>
        <td colspan="7"><hr width="100%"></td></tr>
 	   <tr>
@@ -65,26 +81,28 @@
 		</tr>
    <tr>
       <td colspan="7" align="right">
-				<img src="./img/write.gif" alt="자료등록" align="middle" border="0"></a>
+				<a href="/pds_write"><img src="Pds/img/write.gif" alt="자료등록" align="middle" border="0"></a>
       &nbsp;
 	  </td>
    </tr>
-
+<form name="pds" action="/pds_list" method="post">
      <table border="0" cellspacing="0" width="100%">
       <tr>
       <td><center>
       <font color="#004080" size="4" face="Courier New"><strong>Search&nbsp;</strong></font>
         <select name="search" size="1" style="font-family: 돋움체">
-		   <option>글제목</option>
-		   <option>작성자</option>
-		   <option>글내용</option>
+			<option value="subject" <% if (search.equals("subjet")) { %> selected <% } %>>글제목</option>
+			<option value="name" <% if (search.equals("name")) { %> selected <% } %>>작성자</option>
+			<option value="contents" <% if (search.equals("contents")) { %> selected <% } %>>글내용</option>
 		</select>
-		&nbsp;&nbsp;<input type="text" name="query" size="20">
-		&nbsp;&nbsp;<input type="image" src="./img/search2.gif" align="middle">
+		&nbsp;&nbsp;<input type="text" size=20 name="key" <% if (key != null) { %> value="<%= key %>" <% } %>>
+		&nbsp;&nbsp;<input type="image" src="Pds/img/search2.gif" align="middle" onClick="send()">
 	   </td>
 	   </tr>
     </table>
+</form>
    </table>
 	</td></tr>
 </body>
 
+<%@ include file="/Include/copyright.jsp" %>
