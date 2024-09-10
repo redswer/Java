@@ -15,6 +15,11 @@
 		var url = "pds_delete?idx=${dto.idx}";
 		window.open(url, "pds_delete", "width=500, height = 250, top=150, left=500");
 	}
+	
+	function pds_down(url) {
+		var encURL = encodeURI(url, "UTF-8");
+		location.href="/pds_down?filename=" + encURL;
+	}
   	</script>
  </head>
 
@@ -47,7 +52,7 @@
 			<td class="content">
 				<p align="right"><font size="2" face="돋움">  ${dto.name} / ${dto.regdate} / ${dto.readcnt}번 읽음
 			    <p>${dto.contents}<p>
-				<img src="Pds/img/disk.gif" align="middle" width="22" height="20" border="0">&nbsp;${dto.filename}</font>
+				<img src="Pds/img/disk.gif" align="middle" width="22" height="20" border="0">&nbsp;<a href="javascript:pds_down('${dto.filename}')">${dto.filename}</a></font>
 			</td>
 		</tr>
 	  </table>

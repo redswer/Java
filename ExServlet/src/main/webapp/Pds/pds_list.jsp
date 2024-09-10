@@ -68,7 +68,7 @@
         <td align="center" height="20"><font face="돋움" size="2">&nbsp;<%= list.get(i).getFilename() %></td>
 		<td align="left" height="20"><font face="돋움" size="2"><%= list.get(i).getName() %></font></td>
 		<td align="left" height="20"><font face="돋움" size="2"><%= list.get(i).getRegdate().substring(0, 10) %></font></td>
-		<td align="center" height="20"><font face="돋움" size="2"><%= list.get(i).getReadcnt() %></font></td> 	      
+		<td align="center" height="20"><font face="돋움" size="2"><%= list.get(i).getReadcnt() %></font></td>
 	  </tr>  	
 	  <%
 	  	}

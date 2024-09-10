@@ -30,8 +30,6 @@ public class PdsModifyServlet extends HttpServlet {
 		PdsDAO dao = PdsDAO.getInstance();
 		PdsDTO dto = dao.pdsView(idx);
 		
-		dto.setContents(dto.getContents().replace("\n", "<br>"));
-		
 		request.setAttribute("dto", dto);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("Pds/pds_modify.jsp");
@@ -60,8 +58,11 @@ public class PdsModifyServlet extends HttpServlet {
 			dto.setContents(multi.getParameter("contents"));
 			dto.setPass(multi.getParameter("pass"));
 			
-			dto.setFilename(multi.getFilesystemName("filename")); 
-			String o_file_name = multi.getOriginalFileName("filename");
+			if (multi.getFilesystemName("filename") != null) {
+				dto.setFilename(multi.getFilesystemName("filename"));
+			} else {
+				dto.setFilename(multi.getParameter("o_filename"));
+			}
 			
 			row = dao.pdsModify(dto);
 		} catch (Exception e) {

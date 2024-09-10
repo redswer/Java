@@ -1,6 +1,9 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ include file="/Include/topmenu.jsp" %>
-
+<%@ page import="com.jslhrd.exservlet.model.pds.*" %>
+<%
+	PdsDTO dto = (PdsDTO) request.getAttribute("dto");
+%>
 <html>
 <head><title>자료 등록 수정</title><link rel="stylesheet" type="text/css" href="/stylesheet.css">
 <script type="text/javascript">
@@ -68,6 +71,16 @@
       <td align="right"><img src="Pds/img/bullet-02.gif"></td>
       <td><font size="2" face="돋움">자료설명</font></td>
       <td><textarea wrap="physical" rows="10" name="contents" cols="60">${dto.contents}</textarea></td></tr>
+<%
+	if(dto.getFilename() != null ){
+%>    
+    <tr>
+      <td align="right"><img src="Pds/img/bullet-02.gif"></td>
+      <td><font size="2" face="돋움">파일명</font></td>
+      <td><input value="<%= dto.getFilename() %>" name="o_filename" readOnly> </td></tr>
+<%
+	}
+%>
     <tr>
       <td align="right"><img src="Pds/img/bullet-02.gif"></td>
       <td><font size="2" face="돋움">파일첨부</font></td>
