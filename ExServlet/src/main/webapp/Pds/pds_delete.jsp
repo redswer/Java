@@ -28,6 +28,7 @@
     <td valign="middle" height="40">
     <form action="/pds_delete" name="pds" method="post">
     	<input type="hidden" value="<%= request.getParameter("idx") %>" name="idx">
+    	<input type="hidden" value="${page}" name="page">
     	<font size="2" face="돋움">비밀번호 <input type="password" name="pass" size="8"></font>
     </form>
     <input type="button" value="삭제" onClick="send()">

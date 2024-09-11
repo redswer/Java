@@ -54,6 +54,7 @@
 
 <form action="/pds_modify" enctype="multipart/form-data" name="pds" method="post">
 	<input type="hidden" value="${dto.idx}" name="idx">
+	<input type="hidden" value="${page}" name="page">
    <table border="0">
     <tr>
       <td width="5%" align="right"><img src="Pds/img/bullet-02.gif"></td>

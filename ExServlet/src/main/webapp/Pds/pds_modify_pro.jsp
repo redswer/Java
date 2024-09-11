@@ -14,7 +14,7 @@
 %>
 	<script type="text/javascript">
 		alert("수정완료");
-		location.href="/pds_list";
+		location.href="/pds_list?page=${page}";
 	</script>
 <%
 	} else {

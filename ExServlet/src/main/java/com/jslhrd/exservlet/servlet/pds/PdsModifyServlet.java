@@ -27,10 +27,13 @@ public class PdsModifyServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		
 		int idx = Integer.parseInt(request.getParameter("idx"));
+		int nowpage = Integer.parseInt(request.getParameter("page"));
+		
 		PdsDAO dao = PdsDAO.getInstance();
 		PdsDTO dto = dao.pdsView(idx);
 		
 		request.setAttribute("dto", dto);
+		request.setAttribute("page", nowpage);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("Pds/pds_modify.jsp");
 		rd.forward(request, response);
@@ -48,8 +51,11 @@ public class PdsModifyServlet extends HttpServlet {
 		int maxSize = 5 * 1024 * 1024;
 		
 		int row = 0;
+		int nowpage = 0;
+		
 		try {
 			MultipartRequest multi = new MultipartRequest(request, path, maxSize, encType, new DefaultFileRenamePolicy());
+			nowpage = Integer.parseInt(multi.getParameter("page"));
 			
 			dto.setIdx(Integer.parseInt(multi.getParameter("idx")));
 			dto.setName(multi.getParameter("name"));
@@ -70,6 +76,7 @@ public class PdsModifyServlet extends HttpServlet {
 		}
 		
 		request.setAttribute("row", row);
+		request.setAttribute("page", nowpage);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/Pds/pds_modify_pro.jsp");
 		rd.forward(request, response);

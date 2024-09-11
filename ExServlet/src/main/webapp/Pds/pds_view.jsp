@@ -12,7 +12,7 @@
    </style>
   	<script type="text/javascript">
 	function pds_delete() {
-		var url = "pds_delete?idx=${dto.idx}";
+		var url = "pds_delete?idx=${dto.idx}&page=${page}";
 		window.open(url, "pds_delete", "width=500, height = 250, top=150, left=500");
 	}
 	
@@ -58,9 +58,9 @@
 	  </table>
 	  <p align="center">
 	  <font size="2">
-		<a href="/pds_modify?idx=${dto.idx}"><img src="Pds/img/edit-1.gif" border="0"></a>&nbsp;&nbsp;&nbsp;&nbsp;
+		<a href="/pds_modify?idx=${dto.idx}&page=${page}"><img src="Pds/img/edit-1.gif" border="0"></a>&nbsp;&nbsp;&nbsp;&nbsp;
 		<a href="javascript:pds_delete()"><img src="Pds/img/del.gif" border="0"></a>&nbsp;&nbsp;&nbsp;&nbsp;
-		<a href="/pds_list"><img src="Pds/img/list-2.gif" border="0"></a>
+		<a href="/pds_list?page=${page}"><img src="Pds/img/list-2.gif" border="0"></a>
 	  </font>
      </td>
   </tr>  

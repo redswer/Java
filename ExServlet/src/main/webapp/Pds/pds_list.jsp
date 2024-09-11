@@ -6,6 +6,7 @@
 	List<PdsDTO> list = (List)request.getAttribute("list");
 	String search = (String)request.getAttribute("search");
 	String key = (String)request.getAttribute("key");
+	int listcount = (int)request.getAttribute("listcount");
 %>
 <html>
    <head>
@@ -48,7 +49,7 @@
       </tr>
       <tr>
         <td colspan="7" align="right" valign="middle" height="20">
-		  <font size="2" face="고딕">전체 : <b>${cnt}</b>건 </font>
+		  <font size="2" face="고딕">전체 : <b>${cnt}</b>건 ${totpage}/${page}페이지</font>
 		</td>
 	  </tr>
 	  <tr bgcolor="e3e9ff">
@@ -63,9 +64,9 @@
 	  %>
       <tr onMouseOver="style.backgroundColor='#D1EEEE'" onMouseOut="style.backgroundColor=''">
         <td align="center" height="25">
-        <font face="돋움" size="2" color="#000000"><%= list.get(i).getIdx() %></font></td>
-		<td align="left" height="20"><a href="/pds_view?idx=<%= list.get(i).getIdx() %>">&nbsp;<font face="돋움" size="2"><%= list.get(i).getSubject() %></font></a></td>
-        <td align="center" height="20"><font face="돋움" size="2">&nbsp;<%= list.get(i).getFilename() %></td>
+        <font face="돋움" size="2" color="#000000"><%= listcount-- %></font></td>
+		<td align="left" height="20"><a href="/pds_view?idx=<%= list.get(i).getIdx() %>&page=${page}">&nbsp;<font face="돋움" size="2"><%= list.get(i).getSubject() %></font></a></td>
+        <td align="center" height="20"><font face="돋움" size="2">&nbsp;<%if(list.get(i).getFilename() != null) { %> <%= list.get(i).getFilename() %> <% } %></td>
 		<td align="left" height="20"><font face="돋움" size="2"><%= list.get(i).getName() %></font></td>
 		<td align="left" height="20"><font face="돋움" size="2"><%= list.get(i).getRegdate().substring(0, 10) %></font></td>
 		<td align="center" height="20"><font face="돋움" size="2"><%= list.get(i).getReadcnt() %></font></td>
@@ -77,10 +78,11 @@
        <td colspan="7"><hr width="100%"></td></tr>
 	   <tr>
          <td colspan="5" align="center">
-         <font face="돋움" size="2" color="#000000">[1][2][3]</td>
+         <font face="돋움" size="2" color="#000000">${pageIndex}</td>
 		</tr>
    <tr>
       <td colspan="7" align="right">
+				<a href="/pds_list"><img src="Pds/img/list-2.gif" alt="자료등록" align="middle" border="0"></a>
 				<a href="/pds_write"><img src="Pds/img/write.gif" alt="자료등록" align="middle" border="0"></a>
       &nbsp;
 	  </td>
