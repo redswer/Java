@@ -24,19 +24,31 @@ public class GuestModifyServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		
+		int nowpage = Integer.parseInt(request.getParameter("page"));
 		int idx = Integer.parseInt(request.getParameter("idx"));
+		
 		GuestDAO dao = GuestDAO.getInstance();
 		GuestDTO dto = dao.guestView(idx);
+		
 		request.setAttribute("dto", dto);
+		request.setAttribute("page", nowpage);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/Guest/guest_modify.jsp");
 		rd.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		
 		int idx = Integer.parseInt(request.getParameter("idx"));
+		int nowpage = Integer.parseInt(request.getParameter("page"));
+		
+		
 		GuestDAO dao = GuestDAO.getInstance();
 		GuestDTO dto = new GuestDTO();
+		
 		dto.setIdx(idx);
 		dto.setSubject(request.getParameter("subject"));
 		dto.setContents(request.getParameter("contents"));
@@ -46,6 +58,7 @@ public class GuestModifyServlet extends HttpServlet {
 		
 		request.setAttribute("idx", idx);
 		request.setAttribute("row", row);
+		request.setAttribute("page", nowpage);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("Guest/guest_modify_pro.jsp");
 		rd.forward(request, response);

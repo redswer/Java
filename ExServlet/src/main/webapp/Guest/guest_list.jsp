@@ -6,6 +6,7 @@
 	List<GuestDTO> list = (List)request.getAttribute("list");
 	String search = (String)request.getAttribute("search");
 	String key = (String)request.getAttribute("key");
+	int listcount = (int)request.getAttribute("listcount");
 %>
 <html>
 <head><title>방명록 읽기</title>
@@ -40,7 +41,7 @@
         <img src="Guest/img/bullet-01.gif"> <b>방 명 록</b></font></td></tr>
       <tr>
         <td colspan="5" align="right" valign="middle" height="20">
-		<font size="2" face="고딕">전체 : <b>${cnt}</b>건 - 3 Pages</font></td></tr>
+		<font size="2" face="고딕">전체 : <b>${cnt}</b>건 - ${totpage} / ${page} Pages</font></td></tr>
  	   <tr bgcolor="e3e9ff">
  	      <td width="10%"align="center" height="20"><font face="돋움" size="2">번호</font></td>
  	      <td width="50%" align="center" height="20"><font face="돋움" size="2">제목</font></td>
@@ -54,10 +55,10 @@
 %>
 		<tr onMouseOver="style.backgroundColor='#D1EEEE'" onMouseOut="style.backgroundColor=''">
 			<td align="center" height="25">
-			<font face="돋움" size="2" color="#000000"></font><%= list.get(i).getIdx() %></td>
+			<font face="돋움" size="2" color="#000000"></font><%= listcount-- %></td>
 			<td align="left" height="20">&nbsp;
 				<font face="돋움" size="2" color="#000000">
-				<a class="list" href="/guest_view?idx=<%= list.get(i).getIdx() %>"><%= list.get(i).getSubject() %></a></td>
+				<a class="list" href="/guest_view?idx=<%= list.get(i).getIdx() %>&page=${page}"><%= list.get(i).getSubject() %></a></td>
 					<td align="center" height="20"><font face="돋움" size="2">
 					<a class="list" href="#"><%= list.get(i).getName() %></a></font></td>
 				<td align="center" height="20"><font face="돋움" size="2"><%= list.get(i).getRegdate().substring(0, 10) %></font></td>
@@ -71,7 +72,7 @@
         <table width="700" border="0" cellspacing="0" cellpadding="5">
           <tr>&nbsp;</tr><tr>
              <td colspan="5">        
-                <div align="center">[1][2][3]</div>
+                <div align="center">${pageIndex}</div>
 			  </td>
 			 </tr>
 		</table>
@@ -98,6 +99,7 @@
 				</form>
 			</td>
 			<td width="25%" align="right">
+			<a href="/guest_list"><img src="Guest/img/list-2.gif" border="0"></a>&nbsp;&nbsp;&nbsp;
 			<a href="/guest_write"><img src="Guest/img/write.gif" border="0"></a>
 			</td>
 		</tr>

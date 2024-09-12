@@ -22,7 +22,9 @@ public class BoardViewServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
 		int idx = Integer.parseInt(request.getParameter("idx"));
+		int nowpage = Integer.parseInt(request.getParameter("page"));
 		
 		BoardDAO dao = BoardDAO.getInstance();
 		boolean found = false;
@@ -62,6 +64,7 @@ public class BoardViewServlet extends HttpServlet {
 		dto.setContents(dto.getContents().replace("\n", "<br>"));
 		
 		request.setAttribute("dto", dto);
+		request.setAttribute("page", nowpage);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/Board/board_view.jsp");
 		rd.forward(request, response);

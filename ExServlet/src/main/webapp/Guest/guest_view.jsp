@@ -16,7 +16,7 @@
    </style>
    <script type="text/javascript">
 	function guest_delete() {
-		var url = "guest_delete?idx=${dto.idx}";
+		var url = "guest_delete?idx=${dto.idx}&page=${page}";
 		window.open(url, "guest_delete", "width=500, height = 250, top=150, left=500");
 	}
    </script>
@@ -58,9 +58,9 @@
       <p align="center">
       <font size="2">
        <!-- 목록보기 -->
-       <a href="/guest_list"><img src="Guest/img/list-2.gif" border="0"></a>&nbsp;&nbsp;&nbsp;&nbsp;
+       <a href="/guest_list?page=${page}"><img src="Guest/img/list-2.gif" border="0"></a>&nbsp;&nbsp;&nbsp;&nbsp;
       <!-- 수정 -->
-       <a href="/guest_modify?idx=${dto.idx}"><img src="Guest/img/edit.gif" border="0"></a>&nbsp;&nbsp;&nbsp;&nbsp;
+       <a href="/guest_modify?idx=${dto.idx}&page=${page}"><img src="Guest/img/edit.gif" border="0"></a>&nbsp;&nbsp;&nbsp;&nbsp;
       <!-- 삭제 -->
        <a href="javascript:guest_delete()"><img src="Guest/img/del.gif" border="0"></a>&nbsp;&nbsp;&nbsp;&nbsp;
       <!-- 글쓰기 -->

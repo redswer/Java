@@ -14,7 +14,7 @@
 %>
 	<script type="text/javascript">
 		alert("삭제완료");
-		opener.location.href="/board_list";
+		opener.location.href="/board_list?page=${page}";
 		self.close();
 	</script>
 <%

@@ -18,6 +18,7 @@
  <body>
  <form method="post" name="guest" action="/guest_delete">
  	<input type="hidden" name="idx" value="<%= request.getParameter("idx") %>">
+ 	<input type="hidden" name="page" value="${page}">
    <table border="0" cellpadding="0" cellspacing="0" width="300" align="center">
      <tr>
        <td height="50">

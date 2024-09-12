@@ -42,6 +42,7 @@
      
 	<form name="guest" action="/guest_modify" method="post">
 	<input type="hidden" name="idx" value="${dto.idx}">
+	<input type="hidden" name="page" value="${page}">
       <table border="0">
        <tr>
          <td width="5%" align="right"><img src="Guest/img/bullet-02.gif"></td>

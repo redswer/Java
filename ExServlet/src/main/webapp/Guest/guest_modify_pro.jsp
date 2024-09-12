@@ -14,7 +14,7 @@
 %>
 	<script type="text/javascript">
 		alert("수정완료");
-		location.href="/guest_view?idx=${idx}";
+		location.href="/guest_list?page=${page}";
 	</script>
 <%
 	} else {

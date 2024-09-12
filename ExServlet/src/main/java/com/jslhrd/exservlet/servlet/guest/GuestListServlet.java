@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.jslhrd.exservlet.model.guest.GuestDAO;
 import com.jslhrd.exservlet.model.guest.GuestDTO;
+import com.jslhrd.exservlet.util.PageIndex;
 
 @WebServlet("/guest_list")
 public class GuestListServlet extends HttpServlet {
@@ -24,28 +25,71 @@ public class GuestListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		GuestDAO dao = GuestDAO.getInstance();
 		
-		int cnt = 0;
-		List<GuestDTO> list = null;
-		String search = "";
-		String key = "";
+		String url = "guest_list";
+		String search = "", key = "", addtag="";
 		
-		if (request.getParameter("key") != null) {
+		int totcount = 0;  
+		//검색 조건이 포함될경우
+		if(request.getParameter("key") != null && !request.getParameter("key").equals("")) {
 			search = request.getParameter("search");
 			key = request.getParameter("key");
-			cnt = dao.guestCount();
-			list = dao.guestList(search, key);
-		} else {
-			cnt = dao.guestCount();
-			list = dao.guestList();
+			totcount = dao.guestCount(search, key);   // 총 글수 추출
+		}else {
+			totcount = dao.guestCount();   // 총 글수 추출
+		}
+
+		//페이지수 계산
+		int nowpage = 1;//현재페이지
+		int maxlist = 10;//페이지당 글수
+		int totpage = 1;//총페이지수
+		
+		if(totcount % 10 == 0)
+			totpage = totcount / maxlist;
+		else
+			totpage = totcount / maxlist + 1;
+		
+		if(totpage == 0)
+			totpage = 1;
+		
+		if(request.getParameter("page") != null) {
+			nowpage = Integer.parseInt(request.getParameter("page"));
+		}
+		//현재페이지가 총페이지보다 클때 마지막페이지로 대체
+		if(nowpage > totpage)
+			nowpage= totpage;
+		
+		int startpage = (nowpage - 1) * maxlist + 1;//페이지 시작번호
+		int endpage = nowpage * maxlist;
+		int listcount = totcount - ((nowpage - 1) * maxlist);//일련번호 출력용
+		
+		
+		List<GuestDTO> guestList = null;
+		if(key.equals("")) {
+			guestList = dao.guestList(startpage, endpage);
+		}else {
+			guestList = dao.guestList(startpage, endpage, search, key);
 		}
 		
+		// 페이지 인덱스
+		String pageIndex = "";
+		if (key.equals("")) {
+			pageIndex = PageIndex.pageList(nowpage, totpage, url, addtag);
+		} else {
+			pageIndex = PageIndex.pageListHan(nowpage, totpage, url, search, key);
+		}
+
+		request.setAttribute("cnt", totcount);
+		request.setAttribute("list", guestList);
 		request.setAttribute("search", search);
 		request.setAttribute("key", key);
-		request.setAttribute("cnt", cnt);
-		request.setAttribute("list", list);
+		request.setAttribute("listcount", listcount);
+		request.setAttribute("totpage", totpage);
+		request.setAttribute("page", nowpage);
+		request.setAttribute("pageIndex", pageIndex);
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/Guest/guest_list.jsp");
-		rd.forward(request, response);
+		RequestDispatcher dispatcher = 
+				request.getRequestDispatcher("Guest/guest_list.jsp");
+		dispatcher.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

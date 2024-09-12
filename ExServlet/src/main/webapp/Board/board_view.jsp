@@ -11,7 +11,7 @@
    </style>
 	<script type="text/javascript">
 	function board_delete() {
-		var url = "board_delete?idx=${dto.idx}";
+		var url = "board_delete?idx=${dto.idx}&page=${page}";
 		window.open(url, "board_delete", "width=500, height = 250, top=150, left=500");
 	}
 	</script>
@@ -54,12 +54,12 @@
        <a href="board_write">
        <img src="Board/img/write.jpg" border="0"></a>&nbsp;&nbsp;
       <!-- 수정하기 -->
-       <a href="board_modify?idx=${dto.idx}">
+       <a href="board_modify?idx=${dto.idx}&page=${page}">
        <img src="Board/img/edit.gif" border="0"></a>&nbsp;&nbsp;
          <!-- 삭제하기 -->
        <a href="javascript:board_delete()"><img src="Board/img/del.gif" border="0"></a>&nbsp;&nbsp;
        <!-- 목록보기 -->
-       <a href="/board_list"><img src="Board/img/list-2.gif" border="0"></a>&nbsp;&nbsp;
+       <a href="/board_list?page=${page}"><img src="Board/img/list-2.gif" border="0"></a>&nbsp;&nbsp;
       </font>
     </td>
   </tr>

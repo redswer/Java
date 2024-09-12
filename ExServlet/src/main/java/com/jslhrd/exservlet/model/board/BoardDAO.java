@@ -3,6 +3,7 @@ package com.jslhrd.exservlet.model.board;
 import java.sql.*;
 import java.util.*;
 
+import com.jslhrd.exservlet.model.pds.PdsDTO;
 import com.jslhrd.exservlet.util.DBManager;
 
 public class BoardDAO {
@@ -13,7 +14,7 @@ public class BoardDAO {
 		return instance;
 	}
 	
-	Connection conn = null;
+	Connection con = null;
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
 	
@@ -23,8 +24,8 @@ public class BoardDAO {
 		int cnt = 0;
 		String sql="select count(*) from tbl_board";
 		try {
-			conn = DBManager.getConnection();
-			pstmt = conn.prepareStatement(sql);
+			con = DBManager.getConnection();
+			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				cnt = rs.getInt(1);
@@ -32,7 +33,7 @@ public class BoardDAO {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
-			DBManager.close(conn, pstmt, rs);
+			DBManager.close(con, pstmt, rs);
 		}
 		return cnt;
 	}
@@ -41,8 +42,8 @@ public class BoardDAO {
 		int cnt = 0;
 		String sql="select count(*) from tbl_board where " + search + " like ?";
 		try {
-			conn = DBManager.getConnection();
-			pstmt = conn.prepareStatement(sql);
+			con = DBManager.getConnection();
+			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, "%" + key + "%");
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
@@ -51,18 +52,19 @@ public class BoardDAO {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
-			DBManager.close(conn, pstmt, rs);
+			DBManager.close(con, pstmt, rs);
 		}
 		return cnt;
 	}
 	
+/*	
 	//게시글 전체 목록
 	public List<BoardDTO> boardList() {
 		List<BoardDTO> list = new ArrayList<BoardDTO>();
 		String sql="select * from tbl_board order by idx desc";
 		try {
-			conn = DBManager.getConnection();
-			pstmt = conn.prepareStatement(sql);
+			con = DBManager.getConnection();
+			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				BoardDTO dto = new BoardDTO();
@@ -77,16 +79,53 @@ public class BoardDAO {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
-			DBManager.close(conn, pstmt, rs);
+			DBManager.close(con, pstmt, rs);
 		}
 		return list;
 	}
+*/
+	
+	public List<BoardDTO> boardList(int startpage, int endpage) {
+		String sql = "select x.* from (select rownum as rnum, a.* from(select * from tbl_board order by idx desc) a where rownum <= ?) x where x.rnum >= ?";
+		// mySQL = "select * from tbl_pds order by idx desc limit ?, ?"
+		List<BoardDTO> list = new ArrayList<>();
+		
+		try {
+			con = DBManager.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, endpage);
+			pstmt.setInt(2, startpage);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				BoardDTO dto = new BoardDTO();
+				
+				dto.setIdx(rs.getInt("idx"));
+				dto.setName(rs.getString("name"));
+				dto.setEmail(rs.getString("email"));
+				dto.setSubject(rs.getString("subject"));
+				dto.setContents(rs.getString("contents"));
+				dto.setRegdate(rs.getString("regdate"));
+				dto.setReadcnt(rs.getInt("readcnt"));
+				
+				list.add(dto);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(con, pstmt, rs);
+		}
+		
+		return list;
+	}
+	
+/*
 	public List<BoardDTO> boardList(String search, String key) {
 		List<BoardDTO> list = new ArrayList<BoardDTO>();
 		String sql="select * from tbl_board where " + search + " like ?" + "order by idx desc";
 		try {
-			conn = DBManager.getConnection();
-			pstmt = conn.prepareStatement(sql);
+			con = DBManager.getConnection();
+			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, "%" + key + "%");
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
@@ -102,8 +141,45 @@ public class BoardDAO {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
-			DBManager.close(conn, pstmt, rs);
+			DBManager.close(con, pstmt, rs);
 		}
+		return list;
+	}
+*/
+	
+	public List<BoardDTO> boardList(int startpage, int endpage, String search, String key) {
+		String sql = "select x.* from (select rownum as rnum, a.* from(select * from tbl_board order by idx desc) a where " + search +" like ? and rownum <= ?) x where " + search + " like ? and x.rnum >= ?";
+		// mySQL = "select * from tbl_pds order by idx desc limit ?, ?"
+		List<BoardDTO> list = new ArrayList<>();
+		
+		try {
+			con = DBManager.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, "%" + key + "%");
+			pstmt.setInt(2, endpage);
+			pstmt.setString(3, "%" + key + "%");
+			pstmt.setInt(4, startpage);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				BoardDTO dto = new BoardDTO();
+				
+				dto.setIdx(rs.getInt("idx"));
+				dto.setName(rs.getString("name"));
+				dto.setEmail(rs.getString("email"));
+				dto.setSubject(rs.getString("subject"));
+				dto.setContents(rs.getString("contents"));
+				dto.setRegdate(rs.getString("regdate"));
+				dto.setReadcnt(rs.getInt("readcnt"));
+				
+				list.add(dto);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(con, pstmt, rs);
+		}
+		
 		return list;
 	}
 	
@@ -113,8 +189,8 @@ public class BoardDAO {
 		String sql = "insert into tbl_board(idx, name, email, subject, contents, pass) values(tbl_board_seq_idx.nextval, ?, ?, ?, ? ,?)";
 		
 		try {
-			conn = DBManager.getConnection();
-			pstmt = conn.prepareStatement(sql);
+			con = DBManager.getConnection();
+			pstmt = con.prepareStatement(sql);
 			
 			pstmt.setString(1, dto.getName());
 			pstmt.setString(2, dto.getEmail());
@@ -126,7 +202,7 @@ public class BoardDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			DBManager.close(conn, pstmt, rs);
+			DBManager.close(con, pstmt, rs);
 		}
 		
 		return row;
@@ -138,8 +214,8 @@ public class BoardDAO {
 		String sql = "select * from tbl_board where idx = ?";
 		
 		try {
-			conn = DBManager.getConnection();
-			pstmt = conn.prepareStatement(sql);
+			con = DBManager.getConnection();
+			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, idx);
 			rs = pstmt.executeQuery();
 			
@@ -156,7 +232,7 @@ public class BoardDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			DBManager.close(conn, pstmt, rs);
+			DBManager.close(con, pstmt, rs);
 		}
 		
 		return dto;
@@ -166,14 +242,14 @@ public class BoardDAO {
 		String sql = "update tbl_board set readcnt = readcnt + 1 where idx = ?";
 		
 		try {
-			conn = DBManager.getConnection();
-			pstmt = conn.prepareStatement(sql);
+			con = DBManager.getConnection();
+			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, idx);
 			pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			DBManager.close(conn, pstmt, rs);
+			DBManager.close(con, pstmt, rs);
 		}
 	}
 	
@@ -182,8 +258,8 @@ public class BoardDAO {
 		int row = 0;
 		
 		try {
-			conn = DBManager.getConnection();
-			pstmt = conn.prepareStatement(sql);
+			con = DBManager.getConnection();
+			pstmt = con.prepareStatement(sql);
 			
 			pstmt.setString(1, dto.getEmail());
 			pstmt.setString(2, dto.getSubject());
@@ -195,7 +271,7 @@ public class BoardDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			DBManager.close(conn, pstmt, rs);
+			DBManager.close(con, pstmt, rs);
 		}
 		
 		return row;
@@ -206,15 +282,15 @@ public class BoardDAO {
 		int row = 0;
 		
 		try {
-			conn = DBManager.getConnection();
-			pstmt = conn.prepareStatement(sql);
+			con = DBManager.getConnection();
+			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, dto.getIdx());
 			pstmt.setString(2, dto.getPass());
 			row = pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			DBManager.close(conn, pstmt, rs);
+			DBManager.close(con, pstmt, rs);
 		}
 		return row;
 	}

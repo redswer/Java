@@ -21,17 +21,26 @@ public class BoardDeleteServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		
 		int idx = Integer.parseInt(request.getParameter("idx"));
+		int nowpage = Integer.parseInt(request.getParameter("page"));
 		
 		request.setAttribute("idx", idx);
+		request.setAttribute("page", nowpage);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/Board/board_delete.jsp");
 		rd.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		
 		int idx = Integer.parseInt(request.getParameter("idx"));
 		String pass = request.getParameter("pass");
+		int nowpage = Integer.parseInt(request.getParameter("page"));
+		
+		
 		BoardDAO dao = BoardDAO.getInstance();
 		BoardDTO dto = new BoardDTO();
 		
@@ -41,6 +50,7 @@ public class BoardDeleteServlet extends HttpServlet {
 		int row = dao.boardDelete(dto);
 		
 		request.setAttribute("row", row);
+		request.setAttribute("page", nowpage);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/Board/board_delete_pro.jsp");
 		rd.forward(request, response);

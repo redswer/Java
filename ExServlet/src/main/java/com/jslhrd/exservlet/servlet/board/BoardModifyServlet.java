@@ -21,12 +21,15 @@ public class BoardModifyServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
 		int idx = Integer.parseInt(request.getParameter("idx"));
+		int nowpage = Integer.parseInt(request.getParameter("page"));
 		
 		BoardDAO dao = BoardDAO.getInstance();
 		BoardDTO dto = dao.boardSelect(idx);
 		
 		request.setAttribute("dto", dto);
+		request.setAttribute("page", nowpage);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/Board/board_modify.jsp");
 		rd.forward(request, response);
@@ -42,9 +45,13 @@ public class BoardModifyServlet extends HttpServlet {
 		dto.setContents(request.getParameter("contents"));
 		dto.setPass(request.getParameter("pass"));
 		
+		int nowpage = Integer.parseInt(request.getParameter("page"));
+
+		
 		int row = dao.boardModify(dto);
 		
 		request.setAttribute("row", row);
+		request.setAttribute("page", nowpage);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/Board/board_modify_pro.jsp");
 		rd.forward(request, response);

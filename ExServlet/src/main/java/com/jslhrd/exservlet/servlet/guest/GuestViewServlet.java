@@ -22,7 +22,10 @@ public class GuestViewServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		
 		int idx = Integer.parseInt(request.getParameter("idx"));
+		int nowpage = Integer.parseInt(request.getParameter("page"));
 		
 		GuestDAO dao = GuestDAO.getInstance();
 		boolean found = false;
@@ -61,6 +64,7 @@ public class GuestViewServlet extends HttpServlet {
 		dto.setRegdate(dto.getRegdate().substring(0, 10));
 		
 		request.setAttribute("dto", dto);
+		request.setAttribute("page", nowpage);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/Guest/guest_view.jsp");
 		rd.forward(request, response);

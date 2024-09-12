@@ -9,7 +9,7 @@
 	%>
 	<script type="text/javascript">
 		alert("등록되었습니다");
-		location.href = "/board_list";
+		location.href = "/board_list?page=${page}";
 	</script>
 	<%
 		} else {
