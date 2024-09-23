@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <html>
 <head>
@@ -8,6 +8,7 @@
  </head>
 
  <body>
+ <c:if test="${empty user}">
    <table width="200" height="120" border="0">
    <form name="login_form" action="" method="post" >
      <tr>
@@ -26,13 +27,16 @@
        </td>
      </tr>
      <tr>
-       <td><input type="image" src="./img/login1.gif" border="0" onClick="return check_login()"></td>
+       <td>
+       <input type="image" src="/Include/img/login1.gif" border="0" onClick="return check_login()"></td>
 			 <td>
-           <a href=""><img src="./img/regist.gif" border="0"></a>
+           <a href=""><img src="/Include/img/regist.gif" border="0"></a>
        </td>
      </tr>
  </form>
  </table>
+ </c:if>
+ <c:if test="${!empty user}">
  <table width="100%" height="120" border="0">
    <tr>
      <td bgcolor="#6FA0E" align="center" height="20">
@@ -49,6 +53,8 @@
      </td>
    </tr>
  </table>
+ </c:if>
+ <c:if test="${!empty user}">
  <table width="100%" height="120" border="0">
    <tr>
      <td bgcolor="#6FA0E" align="center" height="20">
@@ -66,5 +72,6 @@
      </td>
    </tr>
  </table>
+ </c:if>
  </body>
  </html>

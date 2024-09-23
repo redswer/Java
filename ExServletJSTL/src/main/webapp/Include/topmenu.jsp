@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <html>
  <head><title>Web Programming Test</title>
@@ -12,7 +12,7 @@
  <table border="0" cellspacing="2" bgcolor="#ecf1ef" width="900" bordercolordark="#ffffff" bordercolorlight="#000000">
    <tr>
      <td width="20%" rowspan="4" valign="bottom" bgcolor="#000000">
-       <a href="/Sample/index.jsp"><img src="./img/ceo.jpg" width="200" height="83" border="0"></a>
+       <a href="/index.jsp"><img src="/Include/img/ceo.jpg" width="200" height="83" border="0"></a>
        <font style="font-size:9pt;color:white;font-family:돋움"><b>Total 136,489
        <font color="yellow"></font>
        | Now 178
@@ -20,24 +20,32 @@
        </b></font>
      </td>
      <td bgcolor="#9966ff" width="10%" height="25" onmouseover="style.backgroundColor='#2772D3'" onmouseout="style.backgroundColor=''">
-     <p align="center"><font color="white" size="2"><b><a href="" class="white">로그인</A></b></font></p>
-     <p align="center"><font color="white" size="2"><b><a href="" class="white">로그아웃</A></b></font></p>
+     <c:if test="${empty user}">
+     	<p align="center"><font color="white" size="2"><b><a href="/user_login" class="white">로그인</A></b></font></p>
+     </c:if>
+     <c:if test="${!empty user}">
+    	<p align="center"><font color="white" size="2"><b><a href="/user_logout" class="white">로그아웃</A></b></font></p>
+     </c:if>
      </td>
      <td bgcolor="#9966ff" width="10%" onmouseover="style.backgroundColor='#2772D3'" onmouseout="style.backgroundColor=''">
-     <p align="center"><font color="white" size="2"><b><a href="" class="white">회원가입</a></b></font></p>
-     <p align="center"><font color="white" size="2"><b><a href="" class="white">정보수정</a></b></font></p>
+     <c:if test="${empty user}">
+     	<p align="center"><font color="white" size="2"><b><a href="" class="white">회원가입</a></b></font></p>
+     </c:if>
+     <c:if test="${!empty user}">
+     	<p align="center"><font color="white" size="2"><b><a href="" class="white">정보수정</a></b></font></p>
+     </c:if>
      </td>
      <td bgcolor="#9966ff" width="10%" onmouseover="style.backgroundColor='#2772D3'" onmouseout="style.backgroundColor=''">
-     <p align="center"><font color="white" size="2"><b>공지사항</b></font></p>
+     <p align="center"><font color="white" size="2"><b><a href="" class="white">공지사항</a></b></font></p>
      </td>
      <td bgcolor="#9966ff" width="10%" onmouseover="style.backgroundColor='#2772D3'" onmouseout="style.backgroundColor=''">
-     <p align="center"><font color="white" size="2"><b>게시판</b></font></p>
+     <p align="center"><font color="white" size="2"><b><a href="/board_list.do" class="white">게시판</a></b></font></p>
      </td>
      <td bgcolor="#9966ff" width="10%" onmouseover="style.backgroundColor='#2772D3'" onmouseout="style.backgroundColor=''">
-     <p align="center"><font color="white" size="2"><b><a href="" class="white">자료실</a></b></font></p>
+     <p align="center"><font color="white" size="2"><b><a href="/pds_list.do" class="white">자료실</a></b></font></p>
      </td>
      <td bgcolor="#9966ff" width="10%" onmouseover="style.backgroundColor='#2772D3'" onmouseout="style.backgroundColor=''">
-     <p align="center"><font color="white" size="2"><b><a href="" class="white">방명록</a></b></font></p>
+     <p align="center"><font color="white" size="2"><b><a href="/guest_list.do" class="white">방명록</a></b></font></p>
      </td>
      <td bgcolor="#9966ff" width="10%" onmouseover="style.backgroundColor='#2772D3'" onmouseout="style.backgroundColor=''">
      <p align="center"><font color="white" size="2"><b>겔러리</b></font></p>
@@ -48,11 +56,11 @@
    </tr>                   
    <tr>
      <td colspan="8">
-     <p><img src="./img/bar-01.gif" width="100%" height="1" border="0"></p>
+     <p><img src="/Include/img/bar-01.gif" width="100%" height="1" border="0"></p>
      </td>
    </tr>
    <tr>
-     <td colspan="8"><p><img src="./img/bar-01.gif" width="100%" height="1" border="0"></p></td>
+     <td colspan="8"><p><img src="/Include/img/bar-01.gif" width="100%" height="1" border="0"></p></td>
    </tr>
    <tr>
      <td><p><b><span style="font-size:15pt;">&nbsp;Search</span></b></p></td>
@@ -71,7 +79,7 @@
          <option value="contents">제목
        </Select>
          <input type="text" name="keyword" size="12">
-         <input type="image" src="./img/search2.gif">
+         <input type="image" src="/Include/img/search2.gif">
      </td>
      </form>
    </tr>
