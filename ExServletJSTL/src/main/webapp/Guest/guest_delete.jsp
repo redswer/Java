@@ -19,7 +19,7 @@
        <font size="2" face="돋움">
        비밀번호 <input type="password" name="pass" size="8"></font>
        <input type="submit" value="삭제">
-       <input type="button" value="닫기"></td></tr>
+       <input type="button" value="닫기" onClick="javascript:self.close()"></td></tr>
    </table>
    </form>
  </body>
