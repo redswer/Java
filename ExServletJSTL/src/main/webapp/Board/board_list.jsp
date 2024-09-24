@@ -55,7 +55,7 @@
 		<c:forEach var="i" items="${list}">
 			<tr onMouseOver="style.backgroundColor='#D1EEEE'" onMouseOut="style.backgroundColor=''">
 				<td align="center" height="25">
-				<font face="돋움" size="2" color="#000000"></font>${i.idx}</td>
+				<font face="돋움" size="2" color="#000000"></font>${listcount}</td>
 				<td align="left" height="20">&nbsp;
 					<font face="돋움" size="2" color="#000000">
 					<a class="list" href="/board_view.do?idx=${i.idx}&page=${page}">${i.subject}</a></td>
@@ -65,6 +65,7 @@
 					<td align="center" height="20"><font face="돋움" size="2">
 					${i.readcnt}</font></td>
 			</tr>
+			<c:set var="listcount" value="${listcount - 1}" />
 		</c:forEach>
 	</c:if>
 	 <div align="center">
