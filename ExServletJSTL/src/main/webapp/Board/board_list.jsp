@@ -58,7 +58,7 @@
 				<font face="돋움" size="2" color="#000000"></font>${listcount}</td>
 				<td align="left" height="20">&nbsp;
 					<font face="돋움" size="2" color="#000000">
-					<a class="list" href="/board_view.do?idx=${i.idx}&page=${page}">${i.subject}</a></td>
+					<a class="list" href="/board_view.do?idx=${i.idx}&page=${page}">${i.subject}</a></font></td>
 						<td align="center" height="20"><font face="돋움" size="2">
 						<a class="list" href="${i.email}">${i.name}</a></font></td>
 					<td align="center" height="20"><font face="돋움" size="2">${i.regdate.substring(0, 10)}</font></td>
