@@ -10,6 +10,12 @@
      td.content { padding:10px; line-height:1.6em; text-align:justify; }
      a.list { text-decoration:none;color:black;font-size:10pt; }
    </style>
+   <script type="text/javascript">
+   	function guest_delete() {
+   		var url = "/guest_delete.do?idx=${dto.idx}&page=${page}";
+   		window.open(url, "guest_delete", "width=500, height = 250, top=150, left=500");
+   	}
+   </script>
  </head>
  <body topmargin="0" leftmargin="0">
    <table border="0" width="800">
@@ -48,7 +54,7 @@
       <p align="center">
       <a href="/guest_list.do?page=${page}">[글 목록]</a> &nbsp;&nbsp;
       <a href="/guest_modify.do?idx=${dto.idx}&page=${page}">[글 수정]</a> &nbsp;&nbsp;
-      <a href="/guest_delete.do?idx=${dto.idx}&page=${page}">[글 삭제]</a> &nbsp;&nbsp;
+      <a href="javascript:guest_delete()">[글 삭제]</a> &nbsp;&nbsp;
       <a href="/guest_write.do">[글 등록]</a>
       </p>
     </td>

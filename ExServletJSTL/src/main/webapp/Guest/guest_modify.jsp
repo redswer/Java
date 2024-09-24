@@ -4,7 +4,27 @@
  <html>
    <head><title>방명록 수정</title>
     <link rel="stylesheet" type="text/css" href="/stylesheet.css">
-
+<script type="text/javascript">
+	function send() {
+		if (!guest.subject.value) {
+			alert("제목을 입력하세요");
+			guest.subject.focus();
+			return;
+		}
+		if (!guest.contents.value) {
+			alert("내용을 입력하세요");
+			guest.contents.focus();
+			return;
+		}
+		if (!guest.pass.value) {
+			alert("비밀번호를 입력하세요");
+			guest.pass.focus();
+			return;
+		}
+		
+		guest.submit();
+	}
+</script>
 </head>
 
  <body topmargin="0" leftmargin="0">
@@ -21,7 +41,7 @@
      <img src="/Guest/img/bullet-03.gif"><font size="2" face="돋움" color="orange"> 잠깐</font> &nbsp;
      <img src="/Guest/img/bullet-02.gif"><font size="2" face="돋움">는 필수 입력 사항입니다.</font><p>
      
-	<form >
+	<form name="guest" action="/guest_modify.do?idx=${dto.idx}&page=${page}" method="post">
       <table border="0">
        <tr>
          <td width="5%" align="right"><img src="/Guest/img/bullet-02.gif"></td>
@@ -47,8 +67,8 @@
         <tr>
           <td align="right">&nbsp;</td>
           <td><font size="2">&nbsp;</font></td>
-          <td><input type="submit" value="수정하기" >&nbsp;
-          <input type="button" value="돌아가기" ></td></tr>
+          <td><input type="button" value="수정하기" onClick="send()">&nbsp;
+          <input type="button" value="돌아가기" onClick="history.back()"></td></tr>
       </table>
       </form>
     </td></tr>
