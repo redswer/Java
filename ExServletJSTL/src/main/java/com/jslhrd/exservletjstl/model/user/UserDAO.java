@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import com.jslhrd.exservletjstl.util.DBConnPool;
 import com.jslhrd.exservletjstl.util.DBManager;
 
 public class UserDAO {
@@ -23,7 +24,6 @@ public class UserDAO {
 		int row = 0;
 		
 		try {
-			con = DBManager.getConnection();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, dto.getName());
 			pstmt.setString(2, dto.getUserid());
@@ -46,7 +46,8 @@ public class UserDAO {
 		int row = 0;
 		
 		try {
-			con = DBManager.getConnection();
+//			con = DBConnPool.getConnection();
+			con = DBConnPool.getConnection();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, userid);
 			rs = pstmt.executeQuery();
@@ -79,7 +80,7 @@ public class UserDAO {
 		UserDTO dto = new UserDTO();
 		
 		try {
-			con = DBManager.getConnection();
+			con = DBConnPool.getConnection();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, userid);
 			rs = pstmt.executeQuery();
@@ -107,7 +108,7 @@ public class UserDAO {
 		int row = 0;
 		
 		try {
-			con = DBManager.getConnection();
+			con = DBConnPool.getConnection();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, userid);
 			rs = pstmt.executeQuery();
@@ -129,7 +130,7 @@ public class UserDAO {
 		int row = 1;
 		
 		try {
-			con = DBManager.getConnection();
+			con = DBConnPool.getConnection();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, dto.getPasswd());
 			pstmt.setString(2, dto.getTel());
