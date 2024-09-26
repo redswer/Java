@@ -13,7 +13,7 @@ import com.jslhrd.exservletjstl.model.user.UserDAO;
 import com.jslhrd.exservletjstl.model.user.UserDTO;
 import com.jslhrd.exservletjstl.util.UserSHA256;
 
-@WebServlet("/user_insert")
+@WebServlet("/user_insert.do")
 public class UserInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

@@ -14,7 +14,7 @@ import com.jslhrd.exservletjstl.model.user.UserDAO;
 import com.jslhrd.exservletjstl.model.user.UserDTO;
 import com.jslhrd.exservletjstl.util.UserSHA256;
 
-@WebServlet("/user_modify")
+@WebServlet("/user_modify.do")
 public class UserModifyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

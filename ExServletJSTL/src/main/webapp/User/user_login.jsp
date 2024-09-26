@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
+<%@ include file="/Include/topmenu.jsp" %>
 
 <HTML>
 <HEAD>
@@ -11,6 +12,22 @@ td   { font-family: 돋움, Verdana; font-size: 9pt; text-decoration: none; colo
       BACKGROUND-POSITION: left top; BACKGROUND-REPEAT: no-repeat;}
 //-->
 </STYLE>
+<script type="text/javascript">
+	function login() {
+		if (!user.userid.value) {
+			alert("아이디를 입력하세요");
+			user.userid.focus();
+			return;
+		}
+		if (!user.passwd.value) {
+			alert("비밀번호를 입력하세요");
+			user.passwd.focus();
+			return;
+		}
+		
+		user.submit();
+	}
+</script>
 </HEAD>
 <body bgcolor="#FFFFFF" text="#000000" leftmargin=0 
   topmargin=0 onLoad='document.fname.user_id.focus();'>
@@ -18,7 +35,7 @@ td   { font-family: 돋움, Verdana; font-size: 9pt; text-decoration: none; colo
 <table border="0" width="800">
 <tr>
   <td width="20%"  bgcolor="#ecf1ef" valign="top" style="padding-left:0;">
-
+<%@ include file="/Include/login_form.jsp" %>
 	<!--로그인 영역 삽입--> 
 
   </td>
@@ -28,7 +45,6 @@ td   { font-family: 돋움, Verdana; font-size: 9pt; text-decoration: none; colo
   <TD width=100>&nbsp;</td>
   <TD>
     <table width="583" border="0" cellspacing="0" cellpadding="0" height="265">
-	  <form name=fname method=post >
 	    <tr>
 		  <td height="298"> 
 		    <table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -46,6 +62,7 @@ td   { font-family: 돋움, Verdana; font-size: 9pt; text-decoration: none; colo
 				   <table border="0" cellpadding="3" cellspacing="1" width="99%" height="321">
 				     <tr bgcolor="#FFFFFF"> 
 					   <td align=CENTER bgcolor="#eff4f8" height="92"> 
+	 	 			 <form name="user" method="post" action="/user_login.do">
 					     <table width="330" border="0" cellspacing="0" cellpadding="1">
 							<tr valign=bottom> 
 							  <td width="21"><img src="/User/img/h_bl02.gif" width="18" height="16"></td>
@@ -61,9 +78,10 @@ td   { font-family: 돋움, Verdana; font-size: 9pt; text-decoration: none; colo
 							  <td>: 
 								<input type=password name="passwd" size=14 maxlength=12 STYLE="WIDTH:155">
 							  </td>
-							  <td><input type=image src="/User/img/login.gif" border=0 align=absmiddle></td>
+							  <td><img src="/User/img/login.gif" border=0 align=absmiddle onClick="login()"></td>
 							</tr>
 						  </table>
+					</form>
 						</td>
 					  </tr>
 					  <tr bgcolor="#FFFFFF"> 

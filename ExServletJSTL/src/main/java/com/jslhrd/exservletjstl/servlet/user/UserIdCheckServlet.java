@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.jslhrd.exservletjstl.model.user.UserDAO;
 
-@WebServlet("/user_id_check")
+@WebServlet("/user_id_check.do")
 public class UserIdCheckServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -20,19 +20,15 @@ public class UserIdCheckServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("User/user_id_check.jsp");
-		rd.forward(request, response);
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String userid = request.getParameter("userid");
 		UserDAO dao = UserDAO.getInstance();
 		
 		int row = dao.userIdCheck(userid);
 		
-		request.setAttribute("row", row);
-		request.setAttribute("userid", userid);
-		
+		response.getWriter().append(String.valueOf(row));
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
 

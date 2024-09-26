@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <HTML>
 
@@ -10,6 +11,7 @@ body { font-family: 돋움, Verdana; font-size: 9pt}
 td   { font-family: 돋움, Verdana; font-size: 9pt; text-decoration: none; color: #000000} 
 -->
 </STYLE>
+<c:if test="${row == 1}">
 <TABLE CELLPADDING=0 CELLSPACING=0 BORDER=0 WIDTH=330>
   <TR BGCOLOR=#7AAAD5>
     <td align=left><img src=./Member/img/h_b02.gif></td>
@@ -23,7 +25,7 @@ td   { font-family: 돋움, Verdana; font-size: 9pt; text-decoration: none; colo
     <TABLE CELLPADDING=4 CELLSPACING=1 BORDER=0 WIDTH=330>
   	  <TR BGCOLOR="#FFFFFF">
         <TD ALIGN="center">
-          xxxx님 환영합니다.<br><br>
+          ${user.userid}님 환영합니다.<br><br>
         </TD>
       </TR>
     </TABLE>
@@ -42,12 +44,19 @@ td   { font-family: 돋움, Verdana; font-size: 9pt; text-decoration: none; colo
 <table cellpadding=0 cellspacing=0 border=0 width=330>
   <tr>
     <td align="center">
-      <a href="#">[자기정보수정]</a>
-      <a href="#">[로그아웃]
+      <a href="/user_modify.do">[자기정보수정]</a>
+      <a href="../index.jsp">[홈으로]
 
 	</td>
   </tr>
 </table>
+</c:if>
+<c:if test="${row != 1}">
+	<script type="text/javascript">
+		alert("로그인 실패");
+		window.location="/user_login.do";
+	</script>
+</c:if>
 
 </BODY>
 </HTML>

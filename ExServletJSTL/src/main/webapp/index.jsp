@@ -27,7 +27,7 @@
       <tr>
         <td colspan="7" align="center" valign="center" height="20">
         <font size="4" face="돋움" color="blue">
-        <img src="/User/img/bullet-01.gif"> <b>공 지 사 항</b></font></td></tr>
+        <img src="/Notice/img/bullet-01.gif"> <b>공 지 사 항</b></font></td></tr>
 	   <tr bgcolor="e3e9ff">
  	      <td width="50%" align="center" height="20"><font face="돋움" size="2">제 목</font></td>
  	      <td width="15%" align="center" height="20"><font face="돋움" size="2">글쓴이</font></td>
@@ -73,7 +73,7 @@
       <tr>
         <td colspan="7" align="center" valign="center" height="20">
         <font size="4" face="돋움" color="blue">
-        <img src="User/img/bullet-01.gif"> <b>게시판</b></font></td></tr>
+        <img src="/Board/img/bullet-01.gif"> <b>게시판</b></font></td></tr>
 	   <tr bgcolor="e3e9ff">
  	      <td width="50%" align="center" height="20"><font face="돋움" size="2">제 목</font></td>
  	      <td width="15%" align="center" height="20"><font face="돋움" size="2">글쓴이</font></td>
@@ -93,7 +93,7 @@
 		</tr>
 		<tr onMouseOver="style.backgroundColor='#D1EEEE'" onMouseOut="style.backgroundColor=''">
 			<td align="left" height="20">&nbsp;
-				<img src="Include/img/reply2.gif">
+				<img src="Board/img/reply2.gif">
 				<font face="돋움" size="2" color="#000000">
 				<a class="list" href="">제목부분입니다</a></td>
 					<td align="center" height="20"><font face="돋움" size="2">
@@ -104,7 +104,7 @@
 		</tr>
 		<tr onMouseOver="style.backgroundColor='#D1EEEE'" onMouseOut="style.backgroundColor=''">
 			<td align="left" height="20">&nbsp;
-				<img src="Include/img/reply2.gif">
+				<img src="Board/img/reply2.gif">
 				<font face="돋움" size="2" color="#000000">
 				<a class="list" href="">제목부분입니다</a></td>
 					<td align="center" height="20"><font face="돋움" size="2">
@@ -119,7 +119,7 @@
       <tr>
         <td colspan="7" align="center" valign="center" height="20">
         <font size="4" face="돋움" color="blue">
-        <img src="User/img/bullet-01.gif"> <b>자료실</b></font></td></tr>
+        <img src="Pds/img/bullet-01.gif"> <b>자료실</b></font></td></tr>
 	   <tr bgcolor="e3e9ff">
  	      <td width="50%" align="center" height="20"><font face="돋움" size="2">제 목</font></td>
  	      <td width="15%" align="center" height="20"><font face="돋움" size="2">글쓴이</font></td>
