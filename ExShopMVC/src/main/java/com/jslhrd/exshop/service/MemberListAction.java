@@ -8,7 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.jslhrd.exshop.model.MemberDTO;
+import com.jslhrd.exshop.model.CommonDTO;
 import com.jslhrd.exshop.model.ShopDAO;
 
 public class MemberListAction implements Action {
@@ -19,7 +19,7 @@ public class MemberListAction implements Action {
 		
 		ShopDAO dao = ShopDAO.getInstance();
 		
-		List<MemberDTO> list = dao.memberList();
+		List<CommonDTO> list = dao.memberList();
 		
 		request.setAttribute("list", list);
 		

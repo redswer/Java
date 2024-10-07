@@ -71,9 +71,9 @@ public class ShopDAO {
 		return row;
 	}
 	
-	public List<MemberDTO> memberList() {
-		String sql = "select * from tbl_member";
-		List<MemberDTO> list = new ArrayList<>();
+	public List<CommonDTO> memberList() {
+		String sql = "select custno, custname, phone, gender, joindate, grade, c.cityname from tbl_member m, tbl_city c where m.city = c.city order by joindate desc";
+		List<CommonDTO> list = new ArrayList<>();
 		
 		try {
 			con = DBManager.getConnection();
@@ -81,15 +81,21 @@ public class ShopDAO {
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-				MemberDTO dto = new MemberDTO();
+				MemberDTO mdto = new MemberDTO();
+				CityDTO cdto = new CityDTO();
+				CommonDTO dto = new CommonDTO();
 				
-				dto.setCustno(rs.getInt("custno"));
-				dto.setCustname(rs.getString("custname"));
-				dto.setPhone(rs.getString("phone"));
-				dto.setGender(rs.getString("gender"));
-				dto.setJoindate(rs.getString("joindate"));
-				dto.setGrade(rs.getString("grade"));
-				dto.setCity(rs.getString("city"));
+				mdto.setCustno(rs.getInt("custno"));
+				mdto.setCustname(rs.getString("custname"));
+				mdto.setPhone(rs.getString("phone"));
+				mdto.setGender(rs.getString("gender"));
+				mdto.setJoindate(rs.getString("joindate"));
+				mdto.setGrade(rs.getString("grade"));
+				
+				cdto.setCityname(rs.getString("cityname"));
+				
+				dto.setMember(mdto);
+				dto.setCity(cdto);
 				
 				list.add(dto);
 			}

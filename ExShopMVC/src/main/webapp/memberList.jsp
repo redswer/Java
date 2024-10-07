@@ -61,13 +61,13 @@
 				    <c:if test="${!empty list}">
 		      			<c:forEach var="i" items="${list}">
 		      				<tr>
-		      					<td>${i.custno}</td>
-		      					<td>${i.custname}</td>
-		      					<td>${i.phone}</td>
-		      					<td>${i.gender}</td>
-		      					<td>${i.joindate}</td>
-		      					<td>${i.grade}</td>
-		      					<td>${i.city}</td>
+		      					<td>${i.member.custno}</td>
+		      					<td>${i.member.custname}</td>
+		      					<td>${i.member.phone}</td>
+		      					<td>${i.member.gender}</td>
+		      					<td>${i.member.joindate}</td>
+		      					<td>${i.member.grade}</td>
+		      					<td>${i.city.cityname}</td>
 		      				</tr>
 		      			</c:forEach>
 	      			</c:if>
