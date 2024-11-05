@@ -1,5 +1,7 @@
 package com.jslhrd.exmybatis.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -21,4 +23,7 @@ public interface TestMapper {
 	
 	// 등록
 	public int deptInsert(DeptDTO dto);
+	
+	//전체출력
+	public List<DeptDTO> deptList();
 }

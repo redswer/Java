@@ -1,5 +1,7 @@
 package com.jslhrd.exmybatis.mappertest;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,33 +18,38 @@ public class TestMapperTest {
 	@Autowired
 	TestMapper mapper;
 	
-	@Test
-	public void nowDateTest() throws Exception {
-		log.info("nowDate : " + mapper.nowDate());
-	}
+//	@Test
+//	public void nowDateTest() throws Exception {
+//		log.info("nowDate : " + mapper.nowDate());
+//	}
+//	
+//	@Test
+//	public void nowDateTest2() throws Exception {
+//		log.info("nowDate2 : " + mapper.nowDate2());
+//	}
+//	
+//	@Test
+//	public void empCount() throws Exception {
+//		log.info("count : " + mapper.empCount());
+//	}
+//	
+//	@Test
+//	public void empCountDno() throws Exception {
+//		log.info("dnoCount : " + mapper.empCountDno(10));
+//	}
+//	
+//	@Test
+//	public void deptInsert() throws Exception {
+//		DeptDTO dto = new DeptDTO();
+//		dto.setDno(100);
+//		dto.setDname("JSL");
+//		dto.setLoc("대전");
+//		
+//		log.info("emptInsert : " + mapper.deptInsert(dto));
+//	}
 	
 	@Test
-	public void nowDateTest2() throws Exception {
-		log.info("nowDate2 : " + mapper.nowDate2());
-	}
-	
-	@Test
-	public void empCount() throws Exception {
-		log.info("count : " + mapper.empCount());
-	}
-	
-	@Test
-	public void empCountDno() throws Exception {
-		log.info("dnoCount : " + mapper.empCountDno(10));
-	}
-	
-	@Test
-	public void deptInsert() throws Exception {
-		DeptDTO dto = new DeptDTO();
-		dto.setDno(100);
-		dto.setDname("JSL");
-		dto.setLoc("대전");
-		
-		log.info("emptInsert : " + mapper.deptInsert(dto));
+	public void deptList() throws Exception {
+		mapper.deptList().forEach(dept -> log.info(dept.toString()));
 	}
 }
