@@ -1,7 +1,5 @@
 package com.jslhrd.exmybatis.mappertest;
 
-import java.util.List;
-
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
