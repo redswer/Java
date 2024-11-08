@@ -53,3 +53,4 @@ WebShop_0927/src/main/webapp/insert.jsp
 *.properties
 exMyBatis/mvnw
 exGuest/mvnw
+exBoard/mvnw
