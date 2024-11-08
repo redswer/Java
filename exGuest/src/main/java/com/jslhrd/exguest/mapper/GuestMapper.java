@@ -15,14 +15,17 @@ public interface GuestMapper {
 	public List<GuestDTO> guestList();
 	
 	// 등록
-	public int guestInsert(GuestDTO dto);
+	public int guestWrite(GuestDTO dto);
+	
+	// 상세
+	public GuestDTO guestView(int idx);
+	
+	// 조회수
+	public int guestReadcnt(int idx);
 	
 	// 수정
-	public int guestUpdate();
-	
-	// 검색
-	public GuestDTO guestDetail();
+	public int guestUpdate(GuestDTO dto);
 	
 	// 삭제
-	public int guestDelete();
+	public int guestDelete(GuestDTO dto);
 }
