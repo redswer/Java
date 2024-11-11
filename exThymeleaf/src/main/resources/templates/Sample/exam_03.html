@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>Exam_03.html</h1>
+	<hr>
+	문자열 결합 : <span th:text="${id} + ${name}"></span><br>
+	<span th:text="|문자열 결합 : ${id}, 이름 : ${name}|"></span>
+	<br>
+	숫자연산 : <span th:text="${score + 10}"></span><br>
+	숫자연산 : <span th:text="${score} + 10"></span><br>
+	<hr>
+	논리연산 : <span th:text="${score} > 90 and ${score} <= 100"></span><br>
+	논리연산 : <span th:text="${score > 90 and score <= 100}"></span>
+</body>
+</html>

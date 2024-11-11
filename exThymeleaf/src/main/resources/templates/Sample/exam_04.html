@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>Exam_04.html</h1>
+	<hr>
+	성별 <span th:text="${dto.gender}"></span><br>
+	<span th:if="${dto.gender==true}">남자</span><br>
+	<span th:if="${dto.gender==false}">여자</span><br>
+	<hr>
+	성별 <span th:text="${dto.gender}"></span><br>
+	<span th:if="${dto.gender!=true}">여자</span><br>
+	<span th:unless="${dto.gender==true}">여자</span><br>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>Exam_02.html</h1>
+	<hr>
+	<h3>이름 : <span th:text="${dto.name}"></span></h3>
+	<h3>성별 : <span th:text="${dto.gender}"></span></h3>
+	<h3>나이 : <span th:text="${dto.age}"></span></h3>
+	<hr>
+	<b th:object="${dto}">
+	이름 : <span th:text="*{name}"></span><br>
+	성별 : <span th:text="*{gender}"></span><br>
+	나이 : <span th:text="*{age}"></span><br>
+	</b>
+</body>
+</html>
